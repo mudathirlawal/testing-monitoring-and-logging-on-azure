@@ -18,7 +18,7 @@ stages:
       vmImage: 'ubuntu-18.04'
     steps:
     - task: DownloadSecureFile@1
-      name: variable-definitions
+      name: variable_definitions
       displayName: Download terraform.tfvars
       inputs:
         secureFile: 'terraform.tfvars' 
@@ -28,14 +28,14 @@ stages:
       inputs:
         knownHostsEntry: 'known_hosts'
         sshPublicKey: $(PUBLIC_KEY)
-        sshKeySecureFile: 'key-secure-1'
+        sshKeySecureFile: 'key_secure_1'
 
     - bash: |
         cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
       displayName: Copy terraform.tfvars
     - bash: |
         cd $(Agent.TempDirectory)
-        cat key-secure-1.pub
+        cat key_secure_1.pub
         cd ~/.ssh/
         cat known_hosts
         cd $(Build.SourcesDirectory)
@@ -51,7 +51,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        backendServiceArm: 'servicon-to-azurerm'
+        backendServiceArm: 'servicon_to_azurerm'
         backendAzureRmResourceGroupName: 'tstate'
         backendAzureRmStorageAccountName: 'tstate19040'
         backendAzureRmContainerName: 'tstate'
@@ -66,7 +66,7 @@ stages:
         commandOptions: |
           -auto-approve 
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-        environmentServiceNameAzureRM: 'servicon-to-azurerm'
+        environmentServiceNameAzureRM: 'servicon_to_azurerm'
 
 - stage: Build
   jobs:
@@ -125,7 +125,7 @@ stages:
               package: $(Pipeline.Workspace)/fakerestapi-atf/fakerestapi-$(Build.BuildId).zip
               deploymentMethod: zipDeploy
 
-  - deployment: vm-deployment
+  - deployment: vm_deployment
     displayName: Deploy virtual machine
     environment:
       name: 'TEST'
@@ -157,7 +157,7 @@ stages:
             displayName: Configure Selenium
 - stage: Test
   jobs:
-  - deployment: test-machine
+  - deployment: test_machine
     displayName: Test VM
     environment:
       name: 'TEST'
@@ -183,7 +183,7 @@ stages:
               targetPath: '$(System.DefaultWorkingDirectory)/log/selenium/selenium-test.log'
               artifactName: 'selenium-logs-atf'
 
-  - job: jmeter-test
+  - job: jmeter_test
     displayName: Test JMeter
     pool:
       vmImage: 'ubuntu-18.04'
@@ -235,7 +235,7 @@ stages:
         targetPath: '$(System.DefaultWorkingDirectory)/log/jmeter'
         artifactName: 'jmeter-logs-atf'
 
-  - job: newman-test
+  - job: newman_test
     displayName: Test Postman with Newman
     pool:
       vmImage: 'ubuntu-18.04'
@@ -267,7 +267,7 @@ stages:
       displayName: Publish Newman logs
       inputs:
         targetPath: '$(System.DefaultWorkingDirectory)/log/newman'
-        artifactName: 'drop-newman-logs'
+        artifactName: 'newman-logs-atf'
     - task: PublishTestResults@2
       displayName: 'Publish Newman test results'
       inputs:
@@ -295,7 +295,7 @@ stages:
       inputs:
         knownHostsEntry: 'known_hosts'
         sshPublicKey: $(PUBLIC_KEY)
-        sshKeySecureFile: 'key-secure-1'
+        sshKeySecureFile: 'key_secure_1'
 
     - bash: |
         cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
@@ -311,7 +311,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        backendServiceArm: 'servicon-to-azurerm'
+        backendServiceArm: 'servicon_to_azurerm'
         backendAzureRmResourceGroupName: 'tstate'
         backendAzureRmStorageAccountName: 'tstate19040'
         backendAzureRmContainerName: 'tstate'
@@ -326,4 +326,4 @@ stages:
         commandOptions: |
           -auto-approve 
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-        environmentServiceNameAzureRM: 'servicon-to-azurerm'
+        environmentServiceNameAzureRM: 'servicon_to_azurerm'
