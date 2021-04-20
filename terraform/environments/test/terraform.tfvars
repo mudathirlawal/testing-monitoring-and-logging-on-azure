@@ -1,12 +1,12 @@
 # Azure subscription vars
-subscription_id = "10fb07bc-4e3e-4785-b8a8-8129a3fa9385"
-client_id       = "2a45b22f-7cfb-4543-804d-44e4c60f404d"
-client_secret   = "RW7ke8dklcNZJJvM8TZvgfv-jG_7Y__D0L"
-tenant_id       = "0dba3d0a-e527-4136-a298-071e8cac8109"
-# access_key      = "KRzhEFskmKkdNYUnJkA7LtgiJ7DtZ/ZQYoZBEkxySwAYuQ3oKFaf9gKqs6blDbfzsOvxIKCgg1YTN5EZs95XLw=="
+subscription_id = "ba125c39-a888-44aa-a026-4c430b1ce555"
+client_id       = "08a1beff-6683-4682-a6fe-24d151ffd083"
+client_secret   = "8r~1Jyhdm7x59Bc1AqVwB.eJXOchbldyrk"
+tenant_id       = "ae5dc272-d68b-4a82-85a8-5b1b8efe5393"
+# access_key    = "nWGMoKhsyyebajPfdRT965w5wRyxtX1BMzPoCgxFY0PYLdlOH0Z9IDBS9uCjIFVXFctaQl1J3jRysF7Jimrwxg=="
 
 # Terraform variables
-storage_account_name = "tstate19040"
+storage_account_name = "tstate24171"
 container_name       = "tstate"
 key                  = "terraform.tfstate"
 
