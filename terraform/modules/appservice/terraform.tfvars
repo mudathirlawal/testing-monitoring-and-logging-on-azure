@@ -7,4 +7,4 @@ tenant_id       = "ae5dc272-d68b-4a82-85a8-5b1b8efe5393"
 # Resource Group/Location
 location = "East US"
 resource_group = "quality-releases-rg"
-application_type = "proj-quality-releases"
+application_type = "quality-releases"
