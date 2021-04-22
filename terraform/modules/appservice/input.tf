@@ -1,21 +1,16 @@
 # Azure GUIDS
 variable "subscription_id" {
-    default = "10fb07bc-4e3e-4785-b8a8-8129a3fa9385"
+    default = "ba125c39-a888-44aa-a026-4c430b1ce555"
 }
 variable "client_id" {
-    default = "2a45b22f-7cfb-4543-804d-44e4c60f404d"
+    default = "08a1beff-6683-4682-a6fe-24d151ffd083"
 }
 variable "client_secret" {
-    default = "RW7ke8dklcNZJJvM8TZvgfv-jG_7Y__D0L"
+    default = "8r~1Jyhdm7x59Bc1AqVwB.eJXOchbldyrk"
 }
 variable "tenant_id" {
-    default = "0dba3d0a-e527-4136-a298-071e8cac8109"
+    default = "0ae5dc272-d68b-4a82-85a8-5b1b8efe5393"
 }
-
-# # Terraform
-# variable "access_key" {
-#     default = "KRzhEFskmKkdNYUnJkA7LtgiJ7DtZ/ZQYoZBEkxySwAYuQ3oKFaf9gKqs6blDbfzsOvxIKCgg1YTN5EZs95XLw=="   
-# }
 
 # Resource Group/Location
 variable "location" {

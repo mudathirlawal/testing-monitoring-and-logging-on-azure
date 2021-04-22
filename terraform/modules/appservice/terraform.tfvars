@@ -1,11 +1,10 @@
 # Azure subscription vars
-subscription_id = "21ced44b-8132-4ae5-a64b-f6f972c1f417"
-client_id       = "7153dc63-1398-417d-9627-8ee269acfed3"
-client_secret   = "oKtYzm0WvZfKmD-xNGTNc~ooYRBe__K_lM"
-tenant_id       = "b8132ecf-d56a-4ef9-8a42-f14efa05f4e6"
-# access_key      = "AkmOlANijXmtwcnFCy88rhpEMCkMLZLtiqUCG7s3c//8HWXzFg66E9JfIYpiH0q9HBE7sad4ObSNGaFq0VTTIg=="
+subscription_id = "ba125c39-a888-44aa-a026-4c430b1ce555"
+client_id       = "08a1beff-6683-4682-a6fe-24d151ffd083"
+client_secret   = "8r~1Jyhdm7x59Bc1AqVwB.eJXOchbldyrk"
+tenant_id       = "ae5dc272-d68b-4a82-85a8-5b1b8efe5393"
 
 # Resource Group/Location
 location = "East US"
-resource_group = "proj-capstone-rg"
-application_type = "capstone-app"
+resource_group = "quality-releases-rg"
+application_type = "proj-quality-releases"
