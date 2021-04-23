@@ -3,7 +3,6 @@ variables:
   python.version: '3.7.6'
   trigger:
     branches:
-      include:
       - ops
     paths:
       exclude:
@@ -13,18 +12,18 @@ variables:
       - README.md
 
   stages:
-  - stage: Provision
-    jobs:
-    - job: provision_azure_resources
-      displayName: Provision Azure resources
-      pool:
-        vmImage: 'ubuntu-18.04'
-      steps:
-      - task: DownloadSecureFile@1
-        name: variable-definitions
-        displayName: Download terraform.tfvars
-        inputs:
-          secureFile: 'terraform.tfvars' 
+    - stage: Provision
+      jobs:
+      - job: provision_azure_resources
+        displayName: Provision Azure resources
+        pool:
+          vmImage: 'ubuntu-18.04'
+        steps:
+        - task: DownloadSecureFile@1
+          name: variable-definitions
+          displayName: Download terraform.tfvars
+          inputs:
+            secureFile: 'terraform.tfvars' 
 
       # Needed for Terraform VM deployment
       - task: InstallSSHKey@0
