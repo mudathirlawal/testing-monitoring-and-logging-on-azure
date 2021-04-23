@@ -2,13 +2,15 @@ name: Azure Pipelines
 variables:
   python.version: '3.7.6'
   trigger:
-  - ops
-  paths:
-    exclude:
-    - .gitignore
-    - workflow-clips/
-    - scripts/
-    - README.md
+    branches:
+      include:
+      - ops
+    paths:
+      exclude:
+      - .gitignore
+      - workflow-clips/
+      - scripts/
+      - README.md
 
   stages:
   - stage: Provision
@@ -16,7 +18,7 @@ variables:
     - job: provision_azure_resources
       displayName: Provision Azure resources
       pool:
-        vmImage: 'ubuntu-18.04'
+        vmImage: 'ubuntu-18.04'-to-azurerm
       steps:
       - task: DownloadSecureFile@1
         name: variable-definitions
