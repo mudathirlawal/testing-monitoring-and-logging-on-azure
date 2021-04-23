@@ -139,23 +139,23 @@ variables:
                 - bash: |
                   #! /bin/bash
 
-                    sudo apt-get install software-properties-common -y
-                    sudo apt-add-repository universe -y
-                    sudo apt-get update -y
-                    sudo apt-get install python3-pip -y
-                    sudo apt-get install unzip -y
-                    sudo apt-get install -y chromium-browser
-                    sudo apt-get install -y chromium-chromedriver
-                    python3 -m pip install --upgrade pip
-                    pip3 install selenium
-                    python3 -c "import selenium; print('Selenium Version:', selenium.__version__)"
+                  sudo apt-get install software-properties-common -y
+                  sudo apt-add-repository universe -y
+                  sudo apt-get update -y
+                  sudo apt-get install python3-pip -y
+                  sudo apt-get install unzip -y
+                  sudo apt-get install -y chromium-browser
+                  sudo apt-get install -y chromium-chromedriver
+                  python3 -m pip install --upgrade pip
+                  pip3 install selenium
+                  python3 -c "import selenium; print('Selenium Version:', selenium.__version__)"
 
-                    # wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh
-                    # sh onboard_agent.sh -w ${AZ_LOG_ANALYTICS_ID} -s ${AZ_LOG_ANALYTICS_PK}
-                    # sudo /opt/microsoft/omsagent/bin/service_control restart ${AZ_LOG_ANALYTICS_ID}
-                  env: # Pass sectret variables in env variables
-                    AZ_LOG_ANALYTICS_ID: $(AZ_LOG_ANALYTICS_ID)
-                    AZ_LOG_ANALYTICS_PK: $(AZ_LOG_ANALYTICS_PK)
+                  # wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh
+                  # sh onboard_agent.sh -w ${AZ_LOG_ANALYTICS_ID} -s ${AZ_LOG_ANALYTICS_PK}
+                  # sudo /opt/microsoft/omsagent/bin/service_control restart ${AZ_LOG_ANALYTICS_ID}
+                  env: # Pass secret variables in env variables
+                  AZ_LOG_ANALYTICS_ID: $(AZ_LOG_ANALYTICS_ID)
+                  AZ_LOG_ANALYTICS_PK: $(AZ_LOG_ANALYTICS_PK)
                   displayName: Configure Selenium
       - stage: Test
         jobs:
