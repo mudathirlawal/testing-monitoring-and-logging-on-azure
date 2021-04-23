@@ -139,7 +139,8 @@ variables:
                 - bash: |
                   #! /bin/bash
 
-                  sudo apt-get install software-properties-common -y
+                  sudo apt update
+                  sudo apt install software-properties-common -y
                   sudo apt-add-repository universe -y
                   sudo apt-get update -y
                   sudo apt-get install python3-pip -y
