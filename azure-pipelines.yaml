@@ -139,7 +139,6 @@ variables:
                 steps:
                 - bash: |
                   #! /bin/bash
-
                   sudo apt update
                   sudo apt install software-properties-common -y
                   sudo apt-add-repository ppa:universe -y
