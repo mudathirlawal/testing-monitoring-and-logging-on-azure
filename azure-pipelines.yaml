@@ -3,12 +3,12 @@ variables:
   python.version: '3.7.6'
   trigger:
     - ops
-  # paths:     
-  #   exclude:
-  #     - .gitignore
-  #     - workflow-clips/
-  #     - scripts/
-  #     - README.md
+  paths:     
+    exclude:
+    - .gitignore
+    - workflow-clips/
+    - scripts/
+    - README.md
 
   stages:
     - stage: Provision
