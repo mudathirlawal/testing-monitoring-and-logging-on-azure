@@ -2,8 +2,7 @@ name: Azure Pipelines
 variables:
   python.version: '3.7.6'
   trigger:
-    branches:
-      include:
+    include:
       - ops
     paths:
       exclude:
