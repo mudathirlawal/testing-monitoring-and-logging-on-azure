@@ -3,7 +3,8 @@ variables:
   python.version: '3.7.6'
   trigger:
     - ops
-    - exclude:
+  paths:     
+    exclude:
       - .gitignore
       - workflow-clips/
       - scripts/
