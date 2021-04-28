@@ -2,15 +2,16 @@ name: Azure Pipelines
 variables:
   python.version: '3.7.6'
   trigger: ops
-  paths:    
-    exclude:
-    - .gitignore
-    - workflow-clips/
-    - scripts/
-    - README.md
+  # paths:    
+  #   exclude:
+  #   - .gitignore
+  #   - workflow-clips/
+  #   - scripts/
+  #   - README.md
 
   stages: 
-    - jobs:
+    - stage: Provision
+      jobs:
       - job: provision_azure_resources
         displayName: Provision Azure resources
         pool:
