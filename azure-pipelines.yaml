@@ -66,34 +66,19 @@ stages:
         environmentServiceNameAzureRM: 'arm-servicon'
 
 - stage: Build
-  jobs:
-  - job: build_artifacts
-    displayName: Build artifacts
-    pool:
-      vmImage: 'ubuntu-18.04'
-    steps:
-    - task: ArchiveFiles@2
-      displayName: Archive FakeRestAPI
-      inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automated-testing/jmeter/fakerestapi'
-        includeRootFolder: false
-        archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/fakerestapi-$(Build.BuildId).zip'
-        verbose: true
-    - task: PublishPipelineArtifact@1
-      displayName: Publish FakeRestAPI artifact
-      inputs:
-        targetPath: '$(Build.ArtifactStagingDirectory)/fakerestapi-$(Build.BuildId).zip'
-        artifactName: 'fakerestapi-atf'
-    - task: ArchiveFiles@2
-      displayName: Archive Selenium
-      inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automated-testing/selenium'
-        includeRootFolder: false
-        archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/selenium-$(Build.BuildId).zip'
-        verbose: true
-    - task: Publ  - stage: Build
+    jobs:
+    - job: build_artifacts
+      displayName: Build artifacts
+      pool:
+        vmImage: 'ubuntu-18.04'
+      steps:
+      - task: ArchiveFiles@2
+        displayName: Archive FakeRestAPI
+        inputs:
+          rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automated-testing/jmeter/fakerestapi'
+          includeRootFolder: false
+          archiveType: 'zip'
+          archiveF  - stage: Build
     jobs:
     - job: build_artifacts
       displayName: Build artifacts
@@ -110,6 +95,241 @@ stages:
           verbose: true
       - task: PublishPipelineArtifact@1
         displayName: Publish FakeRestAPI artifact
+        inputs:
+          targetPath: '$(Build.ArtifactStagingDirectory)/fakerestapi-$(Build.BuildId).zip'
+          artifactName: 'fakerestapi-atf'
+      - task: ArchiveFiles@2
+        displayName: Archive Selenium
+        inputs:
+          rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automated-testing/selenium'
+          includeRootFolder: false
+          archiveType: 'zip'
+          archiveFile: '$(Build.ArtifactStagingDirectory)/selenium-$(Build.BuildId).zip'
+          verbose: true
+      - task: PublishPipelineArtifact@1
+        displayName: Publish Selenium artifact
+        inputs:
+          targetPath: '$(Build.ArtifactStagingDirectory)/selenium-$(Build.BuildId).zip'
+          artifactName: 'selenium-atf'
+
+  - stage: Deployment
+    jobs:
+    - deployment: deployment_fakerestapi
+      displayName: Deploy FakeRestAPI
+      pool:
+        vmImage: 'ubuntu-18.04'
+      environment: 'TEST'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - task: AzureWebApp@1
+              displayName: Deploy Azure WebApp
+              inputs:
+                azureSubscription: 'arm-servicon'
+                appName: 'quality-releases-appservice'
+                appType: 'quality-releases'
+                package: $(Pipeline.Workspace)/fakerestapi-atf/fakerestapi-$(Build.BuildId).zip
+                deploymentMethod: zipDeploy
+    - deployment: vm-deployment
+      displayName: Deploy virtual machine
+      environment:
+        name: 'TEST'
+        resourceType: VirtualMachine
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - bash: |
+            
+                #! /bin/bash
+                sudo apt update
+                sudo apt install software-properties-common -y
+                sudo apt-add-repository ppa:universe -y
+                sudo apt-get update
+                sudo apt-get install python3-pip -y
+                sudo apt-get install unzip -y
+                sudo apt-get install -y chromium-browser
+                sudo apt-get install -y chromium-chromedriver
+                python3 -m pip install --upgrade pip
+                pip3 install selenium
+                python3 -c "import selenium; print('Selenium Version:', selenium.__version__)"
+
+                # wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh
+                # sh onboard_agent.sh -w ${AZ_LOG_ANALYTICS_ID} -s ${AZ_LOG_ANALYTICS_PK}
+                # sudo /opt/microsoft/omsagent/bin/service_control restart ${AZ_LOG_ANALYTICS_ID}
+                env: # Pass secret variables in env variables
+                AZ_LOG_ANALYTICS_ID: $(AZ_LOG_ANALYTICS_ID)
+                AZ_LOG_ANALYTICS_PK: $(AZ_LOG_ANALYTICS_PK)
+                displayName: Configure Selenium
+
+  - stage: Test
+    jobs:
+    - deployment: test-machine
+      displayName: Test VM
+      environment:
+        name: 'TEST'
+        resourceType: VirtualMachine
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - bash: |
+                cd $(Pipeline.Workspace)/selenium-atf
+                find . -type f ! -name 'selenium-$(Build.BuildId).zip' -delete  # delete everything except 'selenium-$(Build.BuildId).zip'
+                unzip -o selenium-$(Build.BuildId).zip
+                sudo mkdir -p /var/log/selenium
+                sudo chmod 664 /var/log/selenium
+                sudo python3 -u selenium-test.py 2>&1 | sudo tee -a /var/log/selenium/selenium-test.log
+                cd $(System.DefaultWorkingDirectory)
+                mkdir -p log/selenium
+                sudo cp /var/log/selenium/selenium-test.log log/selenium/selenium-test.log
+              displayName: Run Selenium tests
+            - task: PublishPipelineArtifact@1
+              displayName: Publish logs from Selenium
+              inputs:
+                targetPath: '$(System.DefaultWorkingDirectory)/log/selenium/selenium-test.log'
+                artifactName: 'selenium-logs-atf'
+  - job: jmeter-test
+    displayName: Test JMeter
+    pool:
+      vmImage: 'ubuntu-18.04'
+    steps:
+    - bash: |
+        sudo apt-get install openjdk-11-jre-headless -y
+        java -version
+        wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.4.tgz -O jmeter.tgz
+        tar xzvf jmeter.tgz
+        apache-jmeter-5.4/bin/jmeter --version
+        mkdir -p log/jmeter
+      displayName: Install JMeter
+  - bash: |
+      apache-jmeter-5.4/bin/jmeter -n -t automated-testing/jmeter/stress-test.jmx \
+                                  -l log/jmeter/stress-test-result.csv \
+                                  -e -f -o log/jmeter/stress-test-html-report \
+                                  -j log/jmeter/jmeter-stress-test.log
+    displayName: JMeter stress test
+  - bash: |
+      apache-jmeter-5.4/bin/jmeter -n -t automated-testing/jmeter/endurance-test.jmx \
+                                  -l log/jmeter/endurance-test-result.csv \
+                                  -e -f -o log/jmeter/endurance-test-html-report \
+                                  -j log/jmeter/jmeter-endurance-test.log
+    displayName: JMeter endurance test
+  - task: ArchiveFiles@2
+    displayName: Archive JMeter stress test HTML report
+    inputs:
+      rootFolderOrFile: '$(System.DefaultWorkingDirectory)/log/jmeter/stress-test-html-report'
+      includeRootFolder: false
+      archiveType: 'zip'
+      archiveFile: '$(System.DefaultWorkingDirectory)/log/jmeter/stress-test-html-report-$(Build.BuildId).zip'
+      verbose: true
+  - task: ArchiveFiles@2
+    displayName: Archive JMeter endurance test HTML report
+    inputs:
+      rootFolderOrFile: '$(System.DefaultWorkingDirectory)/log/jmeter/endurance-test-html-report'
+      includeRootFolder: false
+      archiveType: 'zip'
+      archiveFile: '$(System.DefaultWorkingDirectory)/log/jmeter/endurance-test-html-report-$(Build.BuildId).zip'
+      verbose: true
+  - bash: |
+      rm -rf log/jmeter/stress-test-html-report
+      rm -rf log/jmeter/endurance-test-html-report
+      cd log/jmeter
+      displayName: Delete initial JMeter HTML test reports
+  - task: PublishPipelineArtifact@1
+    displayName: Publish JMeter logs
+    inputs:
+      targetPath: '$(System.DefaultWorkingDirectory)/log/jmeter'
+      artifactName: 'jmeter-logs-atf'
+  - job: newman-test
+    displayName: Test Postman with Newman
+    pool:
+      vmImage: 'ubuntu-18.04'
+    steps: 
+    - task: NodeTool@0
+      displayName: Install Node v12.X
+      inputs:
+        versionSpec: '12.x'
+    - bash: |
+        npm install -g newman
+        newman --version
+        mkdir -p log/newman
+      displayName: Install Newman
+    - bash: |
+        newman run automated-testing/postman/regression-test.json \
+                  --reporters cli,junit \
+                  --reporter-junit-export log/newman/regression-test.xml \
+                  --suppress-exit-code
+      displayName: Newman regression test
+    - bash: |
+        newman run automated-testing/postman/validation-test.json \
+                  -e automated-testing/postman/validation-test-env.postman-environment.json \
+                  --reporters cli,junit \
+                  --reporter-junit-export log/newman/validation-test.xml \
+                  --suppress-exit-code
+        ls -la $(System.DefaultWorkingDirectory)/log/newman/
+      displayName: Newman validation test
+    - task: PublishPipelineArtifact@1
+      displayName: Publish Newman logs
+      inputs:
+        targetPath: '$(System.DefaultWorkingDirectory)/log/newman'
+        artifactName: 'drop-newman-logs'
+    - task: PublishTestResults@2
+      displayName: 'Publish Newman test results'
+      inputs:
+        testRunner: 'JUnit'
+        searchFolder: '$(System.DefaultWorkingDirectory)/log/newman'
+        testResultsFiles: '*.xml'
+        mergeTestResults: true
+        testRunTitle: 'Publish Newman test results'
+
+  - stage: Destroy
+    jobs:
+    - job: destroy_all_resources
+      displayName: Destroy all resources
+      pool:
+        vmImage: 'ubuntu-18.04'
+      steps:
+      - task: DownloadSecureFile@1
+        name: variable-definitions
+        displayName: Download terraform.tfvars
+        inputs:
+          secureFile: 'terraform.tfvars' 
+      # Needed for Terraform VM deployment
+      - task: InstallSSHKey@0
+        inputs:
+          knownHostsEntry: 'known_hosts'
+          sshPublicKey: $(PUBLIC_KEY)
+          sshKeySecureFile: 'key-secure-1'
+      - bash: |
+          cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
+        displayName: Copy terraform.tfvars
+      # install Terraform Azure Pipelines Extension by Microsoft DevLabs
+      - task: TerraformInstaller@0
+        displayName: Install Terraform
+        inputs:
+          terraformVersion: '0.13.5'
+      - task: TerraformTaskV1@0
+        displayName: Terraform Init
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          backendServiceArm: 'arm-servicon'
+          backendAzureRmResourceGroupName: 'tstate'
+          backendAzureRmStorageAccountName: 'tstate24171'
+          backendAzureRmContainerName: 'tstate'
+          backendAzureRmKey: 'terraform.tfstate'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+      - task: TerraformTaskV1@0
+        displayName: Terraform Destroy
+        inputs:
+          provider: 'azurerm'
+          command: 'destroy'
+          commandOptions: |
+            -auto-approve 
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+          environmentServiceNameAzureRM: 'arm-servicon'
+e: Publish FakeRestAPI artifact
         inputs:
           targetPath: '$(Build.ArtifactStagingDirectory)/fakerestapi-$(Build.BuildId).zip'
           artifactName: 'fakerestapi-atf'
