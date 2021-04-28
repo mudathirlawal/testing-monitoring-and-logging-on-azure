@@ -64,7 +64,7 @@ stages:
           -auto-approve 
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: 'arm-servicon'
-        
+
   - stage: Build
     jobs:
     - job: build_artifacts
@@ -79,7 +79,6 @@ stages:
           includeRootFolder: false
           archiveType: 'zip'
           archiveF  - stage: Build
-    jobs:
     - job: build_artifacts
       displayName: Build artifacts
       pool:
@@ -329,7 +328,8 @@ stages:
             -auto-approve 
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
           environmentServiceNameAzureRM: 'arm-servicon'
-e: Publish FakeRestAPI artifact
+
+  -stage: Publish FakeRestAPI artifact
         inputs:
           targetPath: '$(Build.ArtifactStagingDirectory)/fakerestapi-$(Build.BuildId).zip'
           artifactName: 'fakerestapi-atf'
