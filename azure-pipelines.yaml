@@ -64,8 +64,8 @@ stages:
           -auto-approve 
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: 'arm-servicon'
-
-- stage: Build
+        
+  - stage: Build
     jobs:
     - job: build_artifacts
       displayName: Build artifacts
