@@ -330,9 +330,10 @@ stages:
           environmentServiceNameAzureRM: 'arm-servicon'
           
   -stage: Publish FakeRestAPI artifact
-    inputs:
-      targetPath: '$(Build.ArtifactStagingDirectory)/fakerestapi-$(Build.BuildId).zip'
-      artifactName: 'fakerestapi-atf'
+    - task: BuildFakeRestAPIArtifact@2
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)/fakerestapi-$(Build.BuildId).zip'
+        artifactName: 'fakerestapi-atf'
     - task: ArchiveFiles@2
       displayName: Archive Selenium
       inputs:
