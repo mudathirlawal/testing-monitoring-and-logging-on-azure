@@ -66,19 +66,6 @@ stages:
         environmentServiceNameAzureRM: 'arm-servicon'
 
 - stage: Build
-  jobs:
-  - job: build_artifacts
-    displayName: Build artifacts
-    pool:
-      vmImage: 'ubuntu-18.04'
-    steps:
-    - task: ArchiveFiles@2
-      displayName: Archive FakeRestAPI
-      inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automated-testing/jmeter/fakerestapi'
-        includeRootFolder: false
-        archiveType: 'zip'
-        archiveF  - stage: Build
   - job: build_artifacts
     displayName: Build artifacts
     pool:
