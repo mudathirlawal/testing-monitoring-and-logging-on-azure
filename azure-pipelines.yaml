@@ -66,6 +66,7 @@ stages:
         environmentServiceNameAzureRM: 'arm-servicon'
 
 - stage: Build
+  jobs:
   - job: build_artifacts
     displayName: Build artifacts
     pool:
