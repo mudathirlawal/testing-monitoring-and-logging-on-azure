@@ -330,22 +330,22 @@ stages:
           environmentServiceNameAzureRM: 'arm-servicon'
           
   -stage: Publish FakeRestAPI artifact
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)/fakerestapi-$(Build.BuildId).zip'
+      artifactName: 'fakerestapi-atf'
+    - task: ArchiveFiles@2
+      displayName: Archive Selenium
       inputs:
-        targetPath: '$(Build.ArtifactStagingDirectory)/fakerestapi-$(Build.BuildId).zip'
-        artifactName: 'fakerestapi-atf'
-      - task: ArchiveFiles@2
-        displayName: Archive Selenium
-        inputs:
-          rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automated-testing/selenium'
-          includeRootFolder: false
-          archiveType: 'zip'
-          archiveFile: '$(Build.ArtifactStagingDirectory)/selenium-$(Build.BuildId).zip'
-          verbose: true
-      - task: PublishPipelineArtifact@1
-        displayName: Publish Selenium artifact
-        inputs:
-          targetPath: '$(Build.ArtifactStagingDirectory)/selenium-$(Build.BuildId).zip'
-          artifactName: 'selenium-atf'
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automated-testing/selenium'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/selenium-$(Build.BuildId).zip'
+        verbose: true
+    - task: PublishPipelineArtifact@1
+      displayName: Publish Selenium artifact
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)/selenium-$(Build.BuildId).zip'
+        artifactName: 'selenium-atf'
 
   - stage: Deployment
     jobs:
