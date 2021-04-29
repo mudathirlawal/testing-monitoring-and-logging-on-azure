@@ -3,12 +3,12 @@ name: Azure Pipelines
 variables:
   python.version: '3.7.6'
   trigger: ops
-  # paths:    
-  #   exclude:
-  #   - .gitignore
-  #   - workflow-clips/
-  #   - scripts/
-  #   - README.md
+  paths:    
+    exclude:
+    - .gitignore
+    - workflow-clips/
+    - scripts/
+    - README.md
 
 stages: 
 - stage: Provision
@@ -19,7 +19,7 @@ stages:
       vmImage: 'ubuntu-18.04'
     steps:
     - task: DownloadSecureFile@1
-      name: variable-definitions
+      name: variable_definitions
       displayName: Download terraform.tfvars
       inputs:
         secureFile: 'terraform.tfvars' 
@@ -130,7 +130,7 @@ stages:
               appType: 'quality-releases'
               package: $(Pipeline.Workspace)/fakerestapi-atf/fakerestapi-$(Build.BuildId).zip
               deploymentMethod: zipDeploy
-  - deployment: vm-deployment
+  - deployment: vm_deployment
     displayName: Deploy virtual machine
     environment:
       name: 'TEST'
@@ -164,7 +164,7 @@ stages:
 
 - stage: Test
   jobs:
-  - deployment: test-machine
+  - deployment: test_machine
     displayName: Test VM
     environment:
       name: 'TEST'
@@ -189,7 +189,7 @@ stages:
             inputs:
               targetPath: '$(System.DefaultWorkingDirectory)/log/selenium/selenium-test.log'
               artifactName: 'selenium-logs-atf'
-  - job: jmeter-test
+  - job: jmeter_test
     displayName: Test JMeter
     pool:
       vmImage: 'ubuntu-18.04'
@@ -240,7 +240,7 @@ stages:
       inputs:
         targetPath: '$(System.DefaultWorkingDirectory)/log/jmeter'
         artifactName: 'jmeter-logs-atf'
-  - job: newman-test
+  - job: newman_test
     displayName: Test Postman with Newman
     pool:
       vmImage: 'ubuntu-18.04'
@@ -290,7 +290,7 @@ stages:
       vmImage: 'ubuntu-18.04'
     steps:
     - task: DownloadSecureFile@1
-      name: variable-definitions
+      name: variable_definitions
       displayName: Download terraform.tfvars
       inputs:
         secureFile: 'terraform.tfvars' 
