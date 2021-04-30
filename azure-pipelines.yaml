@@ -3,11 +3,11 @@ name: Azure Pipelines
 variables:
   python.version: '3.7.6'
   trigger: ops
-  paths:
-  - .gitignore
-  - workflow-clips/
-  - scripts/
-  - README.md
+    paths:
+      - .gitignore
+      - workflow-clips/
+      - scripts/
+      - README.md
 
 stages: 
 - stage: Provision
