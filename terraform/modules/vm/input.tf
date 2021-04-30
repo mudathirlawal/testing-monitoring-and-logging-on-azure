@@ -12,9 +12,6 @@ variable "tenant_id" {
     default = "ae5dc272-d68b-4a82-85a8-5b1b8efe5393"
 }
 variable "vm_admin_username" {
-    default = "admin"
-}
-variable "vm_size" {
     default = "Standard_B1s"
 }
 
@@ -24,12 +21,6 @@ variable "subnet_id" {
 }
 variable "public_ip_address_id" {
     default = "vm-public-ip"
-}
-variable "virtual_network_name" {
-    default = "VNET_2"
-}
-variable "azurerm_network_interface_test_id" {
-    default = "NIC_ID"
 }
 
 # Resource Group/Location
