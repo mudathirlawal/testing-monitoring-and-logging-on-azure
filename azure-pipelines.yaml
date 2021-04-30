@@ -20,7 +20,7 @@ stages:
     # Needed for Terraform VM deployment
     - task: InstallSSHKey@0
       inputs:
-        knownHostmrs folarinsEntry: 'known_hosts'
+        knownHostsEntry: 'known_hosts'
         sshPublicKey: $(PUBLIC_KEY)
         sshKeySecureFile: 'key-secure-1'
     - bash: |
@@ -65,7 +65,7 @@ stages:
     displayName: Build artifacts
     pool:
       vmImage: 'ubuntu-18.04'
-    steps:
+    steps: 
     - task: ArchiveFiles@2
       displayName: Archive FakeRestAPI
       inputs:
