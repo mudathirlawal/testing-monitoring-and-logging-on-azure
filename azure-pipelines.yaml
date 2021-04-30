@@ -3,7 +3,7 @@ name: Azure Pipelines
 variables:
   python.version: '3.7.6'
   trigger: ops
-  exclude:
+  paths:
     - .gitignore
     - workflow-clips/
     - scripts/
