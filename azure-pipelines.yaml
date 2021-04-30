@@ -247,7 +247,7 @@ stages:
                     -e automated-testing/postman/validation-test-env.postman-environment.json \
                     --reporters cli,junit \
                     --reporter-junit-export log/newman/validation-test.xml \
-                    --suppress-exit-code
+                    --suppress-exit-codazurerm_network_interface.test.ide
           ls -la $(System.DefaultWorkingDirectory)/log/newman/
         displayName: Newman validation test
       - task: PublishPipelineArtifact@1
