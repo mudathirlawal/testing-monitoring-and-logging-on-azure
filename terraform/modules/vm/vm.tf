@@ -22,10 +22,12 @@ resource "azurerm_linux_virtual_machine" "test" {
     username   = var.vm_admin_username
     public_key = file("~/.ssh/key-secure-1.pub")
   }
+
   os_disk {
     caching = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
+  
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
