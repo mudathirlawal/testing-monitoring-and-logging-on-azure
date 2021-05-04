@@ -8,3 +8,17 @@ tenant_id       = "ae5dc272-d68b-4a82-85a8-5b1b8efe5393"
 location = "East US"
 resource_group = "quality-releases-rg"
 application_type = "quality-releases"
+
+# Network
+virtual_network_name = "quality-releases-vnet"
+address_space = ["10.5.0.0/16"]
+address_prefix_test = "10.5.1.0/24"
+
+# Terraform variables
+# key                  = "terraform.tfstate"
+# storage_account_name = "tstate24171"
+# container_name       = "tstate"
+
+# Tags
+# tier = "Test"
+# deployment = "Terraform"
