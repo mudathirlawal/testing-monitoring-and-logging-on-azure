@@ -2,12 +2,13 @@
 **/*.tfvars
 **/*.json
 **/*.exe
+
 # Local .terraform directories
 **/.terraform/*
-
-# .tfstate files
+*.terraform.*
 *.tfstate
 *.tfstate.*
+*terraform
 
 # Crash log files
 crash.log
