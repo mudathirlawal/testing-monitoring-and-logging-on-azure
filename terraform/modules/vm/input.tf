@@ -17,7 +17,7 @@ variable "vm_admin_username" {
 
 # Network
 variable "subnet_id" {
-    default = "subnet1"
+    default = "subnet_1"
 }
 variable "public_ip_address_id" {
     default = "vm-public-ip"
