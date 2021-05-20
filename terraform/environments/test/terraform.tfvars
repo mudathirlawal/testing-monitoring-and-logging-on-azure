@@ -1,8 +1,8 @@
 # Azure subscription vars
-subscription_id = "ba125c39-a888-44aa-a026-4c430b1ce555"
-client_id       = "08a1beff-6683-4682-a6fe-24d151ffd083"
-client_secret   = "8r~1Jyhdm7x59Bc1AqVwB.eJXOchbldyrk"
-tenant_id       = "ae5dc272-d68b-4a82-85a8-5b1b8efe5393"
+subscription_id = "79f93199-ea71-4fc7-a0c1-a0f75c5ea7e1"
+client_id       = "cc696564-4afa-474a-8d3c-c41a8badaaaf"
+client_secret   = "tFoZxzMwom.L2xPSNE3Fy9zMn.YbWQA.m1"
+tenant_id       = "e9164a2c-aad6-42f3-8414-2ce4840890e9"
 
 # Resource Group/Location
 location = "East US"
@@ -17,7 +17,7 @@ address_prefix_test = "10.5.1.0/24"
 # ===
 # Terraform variables
 # key                  = "terraform.tfstate"
-# storage_account_name = "tstate24171"
+# storage_account_name = "tstate851"
 # container_name       = "tstate"
 
 # Tags
