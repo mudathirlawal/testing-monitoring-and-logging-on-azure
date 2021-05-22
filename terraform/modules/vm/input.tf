@@ -12,15 +12,15 @@ variable "tenant_id" {
     default = "e9164a2c-aad6-42f3-8414-2ce4840890e9"
 }
 variable "vm_admin_username" {
-    default = "Standard_B1s"
+    default = "user"
 }
 
 # Network
 variable "subnet_id" {
-    default = "subnet_1"
+    default = "quality-releases-NET-subnet1"
 }
 variable "public_ip_address_id" {
-    default = "vm-public-ip"
+    default = "public_ip_address_id"
 }
 
 # Resource Group/Location
@@ -35,4 +35,7 @@ variable "resource_type" {
 }
 variable "resource_group" {
     default = "quality-releases-rg"
+}
+variable "vm_size" {
+    default = "Standard_B1s"
 }
