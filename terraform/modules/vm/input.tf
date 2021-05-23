@@ -17,11 +17,12 @@ variable "vm_admin_username" {
 
 # Network
 variable "subnet_id" {
-    default = "quality-releases-NET-subnet1"
+    default = "/subscriptions/79f93199-ea71-4fc7-a0c1-a0f75c5ea7e1/resourceGroups/quality-releases-rg/providers/Microsoft.Network/virtualNetworks/quality-releases-NET-subnet1"
 }
 variable "public_ip_address_id" {
-    default = "public_ip_address_id"
+    default = "/subscriptions/79f93199-ea71-4fc7-a0c1-a0f75c5ea7e1/resourceGroups/quality-releases-rg/providers/Microsoft.Network/publicIPAddresses/quality-releases-publicip"
 }
+
 
 # Resource Group/Location
 variable "location" {
