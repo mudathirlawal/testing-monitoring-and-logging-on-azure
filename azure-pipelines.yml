@@ -10,7 +10,7 @@ stages:
   - job: provision_azure_resources
     displayName: Provision Azure resources
     pool:
-      vmImage: 'ubuntu-18.04'
+      vmImage: 'MyLocalPool'
     steps:
     - task: DownloadSecureFile@1
       name: variable_definitions
@@ -64,7 +64,7 @@ stages:
   - job: build_artifacts
     displayName: Build artifacts
     pool:
-      vmImage: 'ubuntu-18.04'
+      vmImage: 'MyLocalPool'
     steps: 
     - task: ArchiveFiles@2
       displayName: Archive FakeRestAPI
@@ -98,7 +98,7 @@ stages:
   - deployment: deployment_fakerestapi
     displayName: Deploy FakeRestAPI
     pool:
-      vmImage: 'ubuntu-18.04'
+      vmImage: 'MyLocalPool'
     environment: 'TEST'
     strategy:
       runOnce:
@@ -174,7 +174,7 @@ stages:
   - job: jmeter_test
     displayName: Test JMeter
     pool:
-      vmImage: 'ubuntu-18.04'
+      vmImage: 'MyLocalPool'
     steps:
     - bash: |
         sudo apt-get install openjdk-11-jre-headless -y
@@ -269,7 +269,7 @@ stages:
   - job: destroy_all_resources
     displayName: Destroy all resources
     pool:
-      vmImage: 'ubuntu-18.04'
+      vmImage: 'MyLocalPool'
     steps:
     - task: DownloadSecureFile@1
       name: variable_definitions
