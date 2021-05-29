@@ -9,8 +9,9 @@ stages:
   jobs:
   - job: provision_azure_resources
     displayName: Provision Azure resources
-    pool:
-      vmImage: 'MyLocalPool'
+    pool: 
+      name: Default
+      # vmImage: 'MyLocalPool'
     steps:
     - task: DownloadSecureFile@1
       name: variable_definitions
@@ -64,7 +65,7 @@ stages:
   - job: build_artifacts
     displayName: Build artifacts
     pool:
-      vmImage: 'MyLocalPool'
+      name: Default
     steps: 
     - task: ArchiveFiles@2
       displayName: Archive FakeRestAPI
@@ -98,7 +99,7 @@ stages:
   - deployment: deployment_fakerestapi
     displayName: Deploy FakeRestAPI
     pool:
-      vmImage: 'MyLocalPool'
+      name: Default
     environment: 'TEST'
     strategy:
       runOnce:
@@ -174,7 +175,7 @@ stages:
   - job: jmeter_test
     displayName: Test JMeter
     pool:
-      vmImage: 'MyLocalPool'
+      name: Default
     steps:
     - bash: |
         sudo apt-get install openjdk-11-jre-headless -y
@@ -225,7 +226,7 @@ stages:
   - job: newman_test
     displayName: Test Postman with Newman
     pool:
-      vmImage: 'ubuntu-18.04'
+      name: Default
     steps: 
       - task: NodeTool@0
         displayName: Install Node v12.X
@@ -269,7 +270,7 @@ stages:
   - job: destroy_all_resources
     displayName: Destroy all resources
     pool:
-      vmImage: 'MyLocalPool'
+      name: Default
     steps:
     - task: DownloadSecureFile@1
       name: variable_definitions
