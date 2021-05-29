@@ -1,4 +1,4 @@
-# File: azure-pipelines.yml
+# File: azure-pipelines.yaml
 name: Azure Pipelines
 variables:
   python.version: '3.7.6'
@@ -9,9 +9,8 @@ stages:
   jobs:
   - job: provision_azure_resources
     displayName: Provision Azure resources
-    pool: 
-      name: Default
-      # vmImage: 'MyLocalPool'
+    pool:
+      vmImage: 'MyLocalPool'
     steps:
     - task: DownloadSecureFile@1
       name: variable_definitions
@@ -65,7 +64,7 @@ stages:
   - job: build_artifacts
     displayName: Build artifacts
     pool:
-      name: Default
+      vmImage: 'MyLocalPool'
     steps: 
     - task: ArchiveFiles@2
       displayName: Archive FakeRestAPI
@@ -99,7 +98,7 @@ stages:
   - deployment: deployment_fakerestapi
     displayName: Deploy FakeRestAPI
     pool:
-      name: Default
+      vmImage: 'MyLocalPool'
     environment: 'TEST'
     strategy:
       runOnce:
@@ -175,7 +174,7 @@ stages:
   - job: jmeter_test
     displayName: Test JMeter
     pool:
-      name: Default
+      vmImage: 'MyLocalPool'
     steps:
     - bash: |
         sudo apt-get install openjdk-11-jre-headless -y
@@ -226,7 +225,7 @@ stages:
   - job: newman_test
     displayName: Test Postman with Newman
     pool:
-      name: Default
+      vmImage: 'ubuntu-18.04'
     steps: 
       - task: NodeTool@0
         displayName: Install Node v12.X
@@ -270,7 +269,7 @@ stages:
   - job: destroy_all_resources
     displayName: Destroy all resources
     pool:
-      name: Default
+      vmImage: 'MyLocalPool'
     steps:
     - task: DownloadSecureFile@1
       name: variable_definitions
