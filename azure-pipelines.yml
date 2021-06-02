@@ -9,8 +9,7 @@ stages:
   jobs:
   - job: provision_azure_resources
     displayName: Provision Azure resources
-    pool:
-      vmImage: 'SelfHostedUbuntuBuildAgent' 
+    pool: 'SelfHostedUbuntuBuildAgent' 
     steps:
     - task: DownloadSecureFile@1
       name: variable_definitions
@@ -63,8 +62,7 @@ stages:
   jobs:
   - job: build_artifacts
     displayName: Build artifacts
-    pool:
-      vmImage: 'SelfHostedUbuntuBuildAgent'
+    pool: 'SelfHostedUbuntuBuildAgent'
     steps: 
     - task: ArchiveFiles@2
       displayName: Archive FakeRestAPI
@@ -97,8 +95,7 @@ stages:
   jobs:
   - deployment: deployment_fakerestapi
     displayName: Deploy FakeRestAPI
-    pool:
-      vmImage: 'SelfHostedUbuntuBuildAgent'
+    pool: 'SelfHostedUbuntuBuildAgent'
     environment: 'TEST'
     strategy:
       runOnce:
@@ -173,8 +170,7 @@ stages:
               artifactName: 'selenium-logs-atf'
   - job: jmeter_test
     displayName: Test JMeter
-    pool:
-      vmImage: 'SelfHostedUbuntuBuildAgent'
+    pool: 'SelfHostedUbuntuBuildAgent'
     steps:
     - bash: |
         sudo apt-get install openjdk-11-jre-headless -y
