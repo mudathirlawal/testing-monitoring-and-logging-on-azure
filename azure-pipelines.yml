@@ -31,8 +31,8 @@ stages:
         cat id_rsa.pub
         cd ~/.ssh/
         cat known_hosts
-        cd ..
-        cd $(System.DefaultWorkingDirectory)
+        cd /home/azureuser/myagent/_work/
+        # cd $(System.DefaultWorkingDirectory)
         pwd
       displayName: Verifying build environment
     # Install Terraform Azure Pipelines Extension by Microsoft DevLabs
