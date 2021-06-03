@@ -31,12 +31,12 @@ stages:
         cd ~/.ssh/
         cat known_hosts
         cd $(Build.SourcesDirectory)
-      displayName: Verifying build env
+      displayName: Verifying build environment
     # Install Terraform Azure Pipelines Extension by Microsoft DevLabs
     - task: TerraformInstaller@0
       displayName: Install Terraform
       inputs:
-        terraformVersion: '0.13.5'
+        terraformVersion: '2.46.0'
     - task: TerraformTaskV1@0
       displayName: Terraform Init
       inputs:
