@@ -23,7 +23,7 @@ stages:
         sshPublicKey: $(myPubKey)
         sshKeySecureFile: 'id_rsa.pub'
     - bash: |
-        cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environment/test
+        cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
       displayName: Copy terraform.tfvars
     - bash: |
         cd $(Agent.TempDirectory)
