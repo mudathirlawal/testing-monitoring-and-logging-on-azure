@@ -26,11 +26,14 @@ stages:
         cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
       displayName: Copy terraform.tfvars
     - bash: |
+        pwd
         cd $(Agent.TempDirectory)
         cat id_rsa.pub
         cd ~/.ssh/
         cat known_hosts
-        cd $(Build.SourcesDirectory)
+        cd ..
+        cd $(System.DefaultWorkingDirectory)
+        pwd
       displayName: Verifying build environment
     # Install Terraform Azure Pipelines Extension by Microsoft DevLabs
     - task: TerraformInstaller@0
@@ -47,7 +50,7 @@ stages:
         backendAzureRmStorageAccountName: 'tstate851'
         backendAzureRmContainerName: 'tstate'
         backendAzureRmKey: 'terraform.tfstate'
-        workingDirectory: '$(Build.SourceWorkingDirectory)/terraform/environments/test'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
     - task: TerraformTaskV1@0
       displayName: Run `terraform apply`
       inputs:
