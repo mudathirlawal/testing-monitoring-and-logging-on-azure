@@ -47,7 +47,7 @@ stages:
         backendAzureRmStorageAccountName: 'tstate851'
         backendAzureRmContainerName: 'tstate'
         backendAzureRmKey: 'terraform.tfstate'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
     - task: TerraformTaskV1@0
       displayName: Run `terraform apply`
       inputs:
@@ -55,7 +55,7 @@ stages:
         command: 'apply'
         commandOptions: |
           -auto-approve 
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: 'arm-servicon'
 
 - stage: Build
