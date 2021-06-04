@@ -30,7 +30,7 @@ stages:
         cd $(Agent.TempDirectory)
         cat id_rsa.pub
         cd ~/.ssh/
-        cat known_hosts
+        cat known_hosts 
         cd /home/azureuser/myagent/_work/
         # cd $(System.DefaultWorkingDirectory)
         pwd
@@ -50,7 +50,7 @@ stages:
         backendAzureRmStorageAccountName: 'tstate851'
         backendAzureRmContainerName: 'tstate'
         backendAzureRmKey: 'terraform.tfstate'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
     - task: TerraformTaskV1@0
       displayName: Run `terraform apply`
       inputs:
