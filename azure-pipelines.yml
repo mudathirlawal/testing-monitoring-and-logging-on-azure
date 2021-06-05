@@ -26,15 +26,18 @@ stages:
         cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
       displayName: Copy terraform.tfvars
     - bash: |
-        pwd
         cd $(Agent.TempDirectory)
         cat id_rsa.pub
         cd ~/.ssh/
         cat known_hosts 
-        cd /home/azureuser/myagent/_work/
-        # cd $(System.DefaultWorkingDirectory)
-        pwd
+        cd $(System.DefaultWorkingDirectory)
       displayName: Verifying build environment
+    # Extract executable file:
+    - task: ExtractFiles@1
+      inputs:
+        archiveFilePatterns: '**/*.zip'
+        cleanDestinationFolder: true
+        overwriteExistingFiles: false
     # Install Terraform Azure Pipelines Extension by Microsoft DevLabs
     - task: TerraformInstaller@0
       displayName: Install Terraform
