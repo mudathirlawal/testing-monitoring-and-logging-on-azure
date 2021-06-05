@@ -49,13 +49,14 @@ stages:
         provider: 'azurerm'
         command: 'init'
         # commandOptions: |
-        #   -backend-config "access_key=$(STORAGE_ACCESS_KEY)"        
+        #   -backend-config "access_key=$(STORAGE_ACCESS_KEY)"
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'                
         backendServiceArm: 'arm-servicon'
         backendAzureRmResourceGroupName: 'tstate'
         backendAzureRmStorageAccountName: 'tstate851'
         backendAzureRmContainerName: 'tstate'
         backendAzureRmKey: 'terraform.tfstate'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+
     - task: TerraformTaskV1@0
       displayName: Run `terraform apply`
       inputs:
