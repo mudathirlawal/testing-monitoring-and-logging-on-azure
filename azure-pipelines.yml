@@ -30,8 +30,7 @@ stages:
         cat id_rsa.pub
         cd ~/.ssh/
         cat known_hosts 
-        cd /home/azureuser/myagent/_work/_tasks/TerraformInstaller_a4789e5d-f6e8-431f-add9-379d640a883c
-        # cd $(System.DefaultWorkingDirectory)
+        cd $(System.DefaultWorkingDirectory)/terraform
       displayName: Verifying build environment
     # # Extract executable file:
     # - task: ExtractFiles@1
@@ -49,8 +48,8 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        commandOptions: |
-          -backend-config "access_key=$(STORAGE_ACCESS_KEY)"        
+        # commandOptions: |
+        #   -backend-config "access_key=$(STORAGE_ACCESS_KEY)"        
         backendServiceArm: 'arm-servicon'
         backendAzureRmResourceGroupName: 'tstate'
         backendAzureRmStorageAccountName: 'tstate851'
