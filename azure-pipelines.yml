@@ -30,14 +30,15 @@ stages:
         cat id_rsa.pub
         cd ~/.ssh/
         cat known_hosts 
-        cd $(System.DefaultWorkingDirectory)
+        cd /home/azureuser/myagent/_work/_tasks/TerraformInstaller_a4789e5d-f6e8-431f-add9-379d640a883c
+        # cd $(System.DefaultWorkingDirectory)
       displayName: Verifying build environment
-    # Extract executable file:
-    - task: ExtractFiles@1
-      inputs:
-        archiveFilePatterns: '**/*.zip'
-        cleanDestinationFolder: true
-        overwriteExistingFiles: false
+    # # Extract executable file:
+    # - task: ExtractFiles@1
+    #   inputs:
+    #     archiveFilePatterns: '**/*.zip'
+    #     cleanDestinationFolder: true
+    #     overwriteExistingFiles: false
     # Install Terraform Azure Pipelines Extension by Microsoft DevLabs
     - task: TerraformInstaller@0
       displayName: Install Terraform
