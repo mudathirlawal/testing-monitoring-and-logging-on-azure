@@ -45,12 +45,14 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
+        commandOptions: |
+          -backend-config "access_key=$(STORAGE_ACCESS_KEY)"        
         backendServiceArm: 'arm-servicon'
         backendAzureRmResourceGroupName: 'tstate'
         backendAzureRmStorageAccountName: 'tstate851'
         backendAzureRmContainerName: 'tstate'
         backendAzureRmKey: 'terraform.tfstate'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/0.15.5/terraform_0.15.5_linux_amd64.zip'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
     - task: TerraformTaskV1@0
       displayName: Run `terraform apply`
       inputs:
@@ -58,7 +60,7 @@ stages:
         command: 'apply'
         commandOptions: |
           -auto-approve 
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/0.15.5/terraform_0.15.5_linux_amd64.zip'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: 'arm-servicon'
 
 - stage: Build
