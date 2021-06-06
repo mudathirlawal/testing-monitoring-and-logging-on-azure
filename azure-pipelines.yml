@@ -27,10 +27,11 @@ stages:
       displayName: Copy terraform.tfvars
     - bash: |
         cd $(Agent.TempDirectory)
-        cat id_rsa.pub
         cd ~/.ssh/ && pwd
+        cat id_rsa.pub
         cat known_hosts 
-        cd ~ && pwd
+        cd ..
+        # cd $(System.DefaultWorkingDirectory) && pwd
       displayName: Verifying build environment
     # Install Terraform Azure Pipelines Extension by Microsoft DevLabs
     - task: TerraformInstaller@0
