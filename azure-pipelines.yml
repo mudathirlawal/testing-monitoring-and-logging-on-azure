@@ -22,22 +22,16 @@ stages:
         knownHostsEntry: 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
         sshPublicKey: $(myPubKey)
         sshKeySecureFile: 'id_rsa.pub'
-    - bash: |
-        cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
-      displayName: Copy terraform.tfvars
-    - bash: |
-        cd $(Agent.TempDirectory)
-        cat id_rsa.pub
-        cd ~/.ssh/
-        cat known_hosts 
-        cd $(System.DefaultWorkingDirectory)/terraform
-      displayName: Verifying build environment
-    # # Extract executable file:
-    # - task: ExtractFiles@1
-    #   inputs:
-    #     archiveFilePatterns: '**/*.zip'
-    #     cleanDestinationFolder: true
-    #     overwriteExistingFiles: false
+    # - bash: |
+    #     cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
+    #   displayName: Copy terraform.tfvars
+    # - bash: |
+    #     cd $(Agent.TempDirectory)
+    #     cat id_rsa.pub
+    #     cd ~/.ssh/
+    #     cat known_hosts 
+    #     cd $(System.DefaultWorkingDirectory)/terraform
+    #   displayName: Verifying build environment
     # Install Terraform Azure Pipelines Extension by Microsoft DevLabs
     - task: TerraformInstaller@0
       displayName: Install Terraform
@@ -48,15 +42,12 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        # commandOptions: |
-        #   -backend-config "access_key=$(STORAGE_ACCESS_KEY)"
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'                
         backendServiceArm: 'arm-servicon'
         backendAzureRmResourceGroupName: 'tstate'
         backendAzureRmStorageAccountName: 'tstate851'
         backendAzureRmContainerName: 'tstate'
         backendAzureRmKey: 'terraform.tfstate'
-
     - task: TerraformTaskV1@0
       displayName: Run `terraform apply`
       inputs:
