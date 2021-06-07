@@ -32,11 +32,28 @@ stages:
         cat known_hosts 
         cd $(System.DefaultWorkingDirectory)/terraform && pwd
       displayName: Verifying build environment
+
+    # # Extract files:
+    # # Extract a variety of archive and compression files such as .7z, .rar, .tar.gz, and .zip
+    # - task: ExtractFiles@1
+    #   inputs:
+    #     #archiveFilePatterns: '**/*.zip' 
+    #     destinationFolder: 
+    #     #cleanDestinationFolder: true 
+    #     #overwriteExistingFiles: false
+    #     #pathToSevenZipTool: 
     # Install Terraform Azure Pipelines Extension by Microsoft DevLabs
-    - task: TerraformInstaller@0
-      displayName: Install Terraform
+
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+      displayName: 'Install terraform'
       inputs:
-        terraformVersion: '0.15.5'
+        terraformVersion: '0.15.5'    
+
+    # - task: TerraformInstaller@0
+    #   displayName: Install Terraform
+    #   inputs:
+    #     terraformVersion: '0.15.5'
+
     - task: TerraformTaskV1@0
       displayName: Terraform Init
       inputs:
