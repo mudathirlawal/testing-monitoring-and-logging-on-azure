@@ -30,7 +30,7 @@ stages:
         cd ~/.ssh/ && pwd
         cat id_rsa.pub
         cat known_hosts 
-        cd $(System.DefaultWorkingDirectory) && pwd
+        cd $(System.DefaultWorkingDirectory)/terraform && pwd
       displayName: Verifying build environment
     # Install Terraform Azure Pipelines Extension by Microsoft DevLabs
     - task: TerraformInstaller@0
