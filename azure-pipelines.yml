@@ -25,7 +25,7 @@ stages:
     - task: CmdLine@2
       inputs:
         script: 'echo Installing terraform ...' 
-        workingDirectory: $(Build.SourcesDirectory)   
+        workingDirectory: $(System.DefaultWorkingDirectory)   
     - task: TerraformInstaller@0
       displayName: 'Install terraform'
       inputs:
