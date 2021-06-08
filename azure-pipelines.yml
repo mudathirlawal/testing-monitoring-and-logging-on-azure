@@ -97,7 +97,7 @@ stages:
             displayName: 'Deploy Azure Web App'
             inputs:
               azureSubscription: 'arm-servicon'
-              appName: 'mwud-appservice'
+              appName: 'quality-releases-appservice'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
 
@@ -123,4 +123,3 @@ stages:
                 python3 -m pip install --upgrade pip
                 pip3 install selenium
                 export PATH=$PATH:some/path
-                
