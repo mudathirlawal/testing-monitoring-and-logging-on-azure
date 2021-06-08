@@ -24,12 +24,8 @@ stages:
         sshKeySecureFile: 'id_rsa.pub'
     - task: CmdLine@2
       inputs:
-        script: 'echo Installing terraform ...' 
+        script: 'sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl' 
         workingDirectory: $(System.DefaultWorkingDirectory)   
-    - task: TerraformInstaller@0
-      displayName: 'Install terraform'
-      inputs:
-        terraformVersion: '0.15.5'
     - task: TerraformTaskV1@0
       displayName: Terraform Init
       inputs:
