@@ -21,25 +21,18 @@ stages:
       inputs:
         knownHostsEntry: 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
         sshPublicKey: $(myPubKey)
-        sshKeySecureFile: 'id_rsa.pub'
+        sshKeySecureFile: 'id_rsa.pub' 
+    # Command line
     - task: CmdLine@2
       inputs:
-        script: |
-
-        #! /bin/bash
-        sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
-        curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-        sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-        sudo apt-get update && sudo apt-get install terraform
-        # workingDirectory: '$(System.DefaultWorkingDirectory)
+        script: 'echo Write your commands here.' 
+        #workingDirectory: # Optional
 
     - task: TerraformTaskV1@0
       displayName: Terraform Init
       inputs:
         provider: 'azurerm'
         command: 'init'
-        commandOptions: |
-          -backend-config "access_key=$(STORAGE_ACCESS_KEY)"
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'                
         backendServiceArm: 'arm-servicon'
         backendAzureRmResourceGroupName: 'tstate'
@@ -129,11 +122,9 @@ stages:
               sudo apt-get install -y chromium-chromedriver
               python3 -m pip install --upgrade pip
               pip3 install selenium
-              export PATH=$PATH:/usr/lib/chromium-browser/
-              cd $(Pipeline.Workspace)/drop-selenium
-              unzip -o $(Pipeline.Workspace)/drop-selenium/$(Build.BuildId)-selenium-tests -d .
-
-- stage: Testing
+              python3 -c "import selenium; print('Selenium Version:', selenium.__version__)"
+        
+- stage: Test
   jobs:
   - deployment: test_machine
     displayName: Test VM
@@ -250,4 +241,3 @@ stages:
           testResultsFiles: '*.xml'
           mergeTestResults: true
           testRunTitle: 'Publish Newman test results'
-
