@@ -24,7 +24,7 @@ stages:
         sshKeySecureFile: 'id_rsa.pub'
     - task: CmdLine@2
       inputs:
-        script: './scripts/install_terraform.sh' 
+        script: 'echo testing ...' 
         workingDirectory: $(System.DefaultWorkingDirectory)   
     - task: TerraformTaskV1@0
       displayName: Terraform Init
