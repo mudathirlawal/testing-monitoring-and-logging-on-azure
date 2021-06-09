@@ -25,13 +25,14 @@ stages:
     - task: CmdLine@2
       inputs:
         script: |
-
+        
         #! /bin/bash
+
         sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
         curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
         sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
         sudo apt-get update && sudo apt-get install terraform
-        #workingDirectory: '$(System.DefaultWorkingDirectory)
+        workingDirectory: '$(System.DefaultWorkingDirectory)
 
     - task: TerraformTaskV1@0
       displayName: Terraform Init
