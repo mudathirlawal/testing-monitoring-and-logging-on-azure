@@ -84,7 +84,7 @@ stages:
   jobs:
   - deployment: deployment_fakerestapi
     displayName: Deploy FakeRestAPI
-    pool: 'vsts-agent-linux-x64'
+    pool: 'SelfHostedUbuntuAgentPool'
     environment: 'TEST'
     strategy:
       runOnce:
