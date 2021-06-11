@@ -1,4 +1,4 @@
-# File: azure-pipelines.yaml
+# File: azure-pipelines.yml
 name: Azure Pipelines
 variables:
   python.version: '3.7.6'
@@ -22,21 +22,59 @@ stages:
         knownHostsEntry: 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
         sshPublicKey: $(myPubKey)
         sshKeySecureFile: 'id_rsa.pub' 
-    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
-      displayName: 'Install Terraform'
-      inputs:
-        terraformVersion: '1.0.0'      
-    - task: TerraformTaskV1@0
-      displayName: Terraform Init
-      inputs:
-        provider: 'azurerm'
-        command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'                
-        backendServiceArm: 'arm-servicon'
-        backendAzureRmResourceGroupName: 'tstate'
-        backendAzureRmStorageAccountName: 'tstate851'
-        backendAzureRmContainerName: 'tstate'
-        backendAzureRmKey: 'terraform.tfstate'
+
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+      displayName: 'Install Terraform 0.12.20' 
+
+    # - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+    #   displayName: 'Install Terraform'
+    #   inputs:
+    #     terraformVersion: '1.0.0'
+
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+    displayName: 'Terraform : Initialization'
+    inputs:
+      workingDirectory: blog
+      backendServiceArm: '' #replace
+      backendAzureRmResourceGroupName: '' #replace
+      backendAzureRmStorageAccountName:  #replace
+      backendAzureRmContainerName: 
+      backendAzureRmKey: #replace
+
+    - task: CopyFiles@2
+    displayName: 'Prepare files for publish'
+    inputs:
+      SourceFolder: blog
+      Contents: |
+       **
+       !**\.terraform\** 
+       
+      TargetFolder: '$(Build.StagingDirectory)'
+  
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Pipeline Artifact'
+    inputs:
+      targetPath: '$(Build.StagingDirectory)'
+      artifact: #replace with name
+  
+  - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+    displayName: 'Terraform : Validation'
+    inputs:
+      command: validate
+      workingDirectory: blog     
+
+    # - task: TerraformTaskV1@0
+    #   displayName: Terraform Init
+    #   inputs:
+    #     provider: 'azurerm'
+    #     command: 'init'
+    #     workingDirectory: '$(terraformWorkingDirectory)/terraform/environments/test'                
+    #     backendServiceArm: 'arm-servicon'
+    #     backendAzureRmResourceGroupName: 'tstate'
+    #     backendAzureRmStorageAccountName: 'tstate851'
+    #     backendAzureRmContainerName: 'tstate'
+    #     backendAzureRmKey: 'terraform.tfstate'
+
     - task: TerraformTaskV1@0
       displayName: Run `terraform apply`
       inputs:
@@ -98,7 +136,6 @@ stages:
               appType: 'quality-releases'
               package: $(Pipeline.Workspace)/fakerestapi-atf/fakerestapi-$(Build.BuildId).zip
               deploymentMethod: zipDeploy
-              
   - deployment: vm_deployment
     displayName: Deploy virtual machine
     environment:
