@@ -35,29 +35,29 @@ stages:
     #     terraformVersion: '1.0.0'
 
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
-    displayName: 'Terraform : Initialization'
-    inputs:
-      provider: 'azurerm'
-      command: 'init'
-      workingDirectory: '/home/azureuser/myagent/_work'                
-      backendServiceArm: 'arm-servicon'
-      backendAzureRmResourceGroupName: 'tstate'
-      backendAzureRmStorageAccountName: 'tstate851'
-      backendAzureRmContainerName: 'tstate'
-      backendAzureRmKey: 'terraform.tfstate'
-  - task: CopyFiles@2
-    displayName: 'Prepare files for publish'
-    inputs:
-      SourceFolder: /home/azureuser/myagent/_work
-      Contents: |
-       **
-       !**\.terraform\** 
-      TargetFolder: '$(Build.StagingDirectory)'
-  - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
-    displayName: 'Terraform : Validation'
-    inputs:
-      command: validate
-      workingDirectory: '/home/azureuser/myagent/_work'     
+      displayName: 'Terraform : Initialization'
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: '/home/azureuser/myagent/_work'                
+        backendServiceArm: 'arm-servicon'
+        backendAzureRmResourceGroupName: 'tstate'
+        backendAzureRmStorageAccountName: 'tstate851'
+        backendAzureRmContainerName: 'tstate'
+        backendAzureRmKey: 'terraform.tfstate'
+    - task: CopyFiles@2
+      displayName: 'Prepare files for publish'
+      inputs:
+        SourceFolder: /home/azureuser/myagent/_work
+        Contents: |
+        **
+        !**\.terraform\** 
+        TargetFolder: '$(Build.StagingDirectory)'
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+      displayName: 'Terraform : Validation'
+      inputs:
+        command: validate
+        workingDirectory: '/home/azureuser/myagent/_work'     
 
     # - task: TerraformTaskV1@0
     #   displayName: Terraform Init
