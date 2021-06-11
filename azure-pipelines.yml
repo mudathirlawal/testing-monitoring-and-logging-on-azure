@@ -37,29 +37,22 @@ stages:
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
     displayName: 'Terraform : Initialization'
     inputs:
-      workingDirectory: '/home/azureuser/myagent/_work'
-      backendServiceArm: '' #replace
-      backendAzureRmResourceGroupName: '' #replace
-      backendAzureRmStorageAccountName:  #replace
-      backendAzureRmContainerName: 
-      backendAzureRmKey: #replace
-
-    - task: CopyFiles@2
+      provider: 'azurerm'
+      command: 'init'
+      workingDirectory: '/home/azureuser/myagent/_work'                
+      backendServiceArm: 'arm-servicon'
+      backendAzureRmResourceGroupName: 'tstate'
+      backendAzureRmStorageAccountName: 'tstate851'
+      backendAzureRmContainerName: 'tstate'
+      backendAzureRmKey: 'terraform.tfstate'
+  - task: CopyFiles@2
     displayName: 'Prepare files for publish'
     inputs:
       SourceFolder: /home/azureuser/myagent/_work
       Contents: |
        **
        !**\.terraform\** 
-       
       TargetFolder: '$(Build.StagingDirectory)'
-  
-  - task: PublishPipelineArtifact@1
-    displayName: 'Publish Pipeline Artifact'
-    inputs:
-      targetPath: '$(Build.StagingDirectory)'
-      artifact: #replace with name
-  
   - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
     displayName: 'Terraform : Validation'
     inputs:
