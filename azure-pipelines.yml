@@ -50,8 +50,8 @@ stages:
       inputs:
         SourceFolder: /home/azureuser/myagent/_work
         Contents: |
-        **
-        !**\.terraform\** 
+          **
+          !**\.terraform\** 
         TargetFolder: '$(Build.StagingDirectory)'
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
       displayName: 'Terraform : Validation'
