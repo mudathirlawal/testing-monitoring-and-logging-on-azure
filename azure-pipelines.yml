@@ -37,7 +37,7 @@ stages:
     - task: TerraformTaskV1@0
       displayName: 'Terraform : Initialization'
       inputs:
-        provider: 'azurerm'
+        backendType: 'azurerm'
         command: 'init'
         commandOptions: |
           -reconfigure        
