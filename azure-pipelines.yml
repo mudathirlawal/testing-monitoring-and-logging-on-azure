@@ -53,11 +53,12 @@ stages:
           **
           !**\.terraform\** 
         TargetFolder: '$(Build.StagingDirectory)'
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
-      displayName: 'Terraform : Validation'
-      inputs:
-        command: validate
-        workingDirectory: '/home/azureuser/myagent/_work/_tasks'     
+
+    # - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+    #   displayName: 'Terraform : Validation'
+    #   inputs:
+    #     command: validate
+    #     workingDirectory: '/home/azureuser/myagent/_work/_tasks'     
 
     # - task: TerraformTaskV1@0
     #   displayName: Terraform Init
