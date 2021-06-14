@@ -27,7 +27,7 @@ stages:
       displayName: 'Install Terraform 1.0.0'
       inputs:
         terraformVersion: '1.0.0'
-        workingDirectory: '/home/azureuser/myagent/_work/terraform/environments/test' 
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test' 
 
     # - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
     #   displayName: 'Install Terraform'
@@ -39,7 +39,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '/home/azureuser/myagent/_work/terraform/environments/test'                
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'                
         backendServiceArm: 'arm-servicon'
         backendAzureRmResourceGroupName: 'tstate'
         backendAzureRmStorageAccountName: 'tstate851'
@@ -48,7 +48,7 @@ stages:
     - task: CopyFiles@2
       displayName: 'Prepare files for publish'
       inputs:
-        SourceFolder: /home/azureuser/myagent/_work/
+        SourceFolder: $(System.DefaultWorkingDirectory)/terraform/environments/test
         Contents: |
           **
           !**\.terraform\** 
