@@ -24,9 +24,9 @@ stages:
         sshKeySecureFile: 'id_rsa.pub' 
 
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
-      displayName: 'Install Terraform 1.0.0'
+      displayName: 'Install Terraform 2.46.0'
       inputs:
-        terraformVersion: '1.0.0'
+        terraformVersion: '2.46.0'
         workingDirectory: '/home/azureuser/myagent/_work/_tasks' 
 
     # - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
@@ -265,7 +265,6 @@ stages:
         inputs:
           targetPath: '$(System.DefaultWorkingDirectory)/log/newman'
           artifactName: 'drop-newman-logs'
-          
       - task: PublishTestResults@2
         displayName: 'Publish Newman test results'
         inputs:
