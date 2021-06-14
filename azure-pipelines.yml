@@ -39,8 +39,8 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        # commandOptions: |
-        #   -reconfigure        
+        commandOptions: |
+          -reconfigure        
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'                
         backendServiceArm: 'arm-servicon'
         backendAzureRmResourceGroupName: 'tstate'
