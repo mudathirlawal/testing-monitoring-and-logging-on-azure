@@ -39,7 +39,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        # workingDirectory: '/home/azureuser/myagent/_work/_tasks'                
+        workingDirectory: '/home/azureuser/myagent/_work/_tasks'                
         backendServiceArm: 'arm-servicon'
         backendAzureRmResourceGroupName: 'tstate'
         backendAzureRmStorageAccountName: 'tstate851'
@@ -78,7 +78,7 @@ stages:
         command: 'apply'
         commandOptions: |
           -auto-approve 
-        # workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: 'arm-servicon'
 
 - stage: Build
