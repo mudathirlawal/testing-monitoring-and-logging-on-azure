@@ -34,7 +34,7 @@ stages:
       inputs:
         terraformVersion: '1.0.0'
 
-    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformTaskV1@0
+    - task: TerraformCLI
       displayName: 'Terraform : Initialization'
       inputs:
         provider: 'azurerm'
