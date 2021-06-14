@@ -34,7 +34,7 @@ stages:
       inputs:
         terraformVersion: '1.0.0'
 
-    - task: TerraformCLI
+    - task: TerraformTaskV1@0
       displayName: 'Terraform : Initialization'
       inputs:
         provider: 'azurerm'
