@@ -44,7 +44,7 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'                
         backendServiceArm: 'arm-servicon'
         backendAzureRmResourceGroupName: 'tstate'
-        backendAzureRmStorageAccountName: 'tstate851'
+        backendAzureRmStorageAccountName: 'tstate1096'
         backendAzureRmContainerName: 'tstate'
         backendAzureRmKey: 'terraform.tfstate'
 
@@ -71,7 +71,7 @@ stages:
     #     workingDirectory: '$(terraformWorkingDirectory)/terraform/environments/test'                
     #     backendServiceArm: 'arm-servicon'
     #     backendAzureRmResourceGroupName: 'tstate'
-    #     backendAzureRmStorageAccountName: 'tstate851'
+    #     backendAzureRmStorageAccountName: 'tstate1096'
     #     backendAzureRmContainerName: 'tstate'
     #     backendAzureRmKey: 'terraform.tfstate'
 
