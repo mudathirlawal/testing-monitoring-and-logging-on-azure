@@ -9,7 +9,7 @@ stages:
   jobs:
   - job: provision_azure_resources
     displayName: Provision Azure resources
-    pool: 'SelfHostedUbuntuAgentPool' 
+    pool: 'ubuntu-18.04' 
     steps:
     - task: DownloadSecureFile@1
       name: variable_definitions
@@ -89,7 +89,7 @@ stages:
   jobs:
   - job: build_artifacts
     displayName: Build artifacts
-    pool: 'SelfHostedUbuntuAgentPool'
+    pool: 'ubuntu-18.04'
     steps: 
     - task: ArchiveFiles@2
       displayName: Archive FakeRestAPI
@@ -122,7 +122,7 @@ stages:
   jobs:
   - deployment: deployment_fakerestapi
     displayName: Deploy FakeRestAPI
-    pool: 'SelfHostedUbuntuAgentPool'
+    pool: 'ubuntu-18.04'
     environment: 'TEST'
     strategy:
       runOnce:
@@ -189,7 +189,7 @@ stages:
               artifactName: 'selenium-logs-atf'
   - job: jmeter_test
     displayName: Test JMeter
-    pool: 'SelfHostedUbuntuAgentPool'
+    pool: 'ubuntu-18.04'
     steps:
     - bash: |
         sudo apt-get install openjdk-11-jre-headless -y
@@ -239,7 +239,7 @@ stages:
         artifactName: 'jmeter-logs-atf'
   - job: newman_test
     displayName: Test Postman with Newman
-    pool: 'SelfHostedUbuntuAgentPool'
+    pool: 'ubuntu-18.04'
     steps: 
       - task: NodeTool@0
         displayName: Install Node v12.X
