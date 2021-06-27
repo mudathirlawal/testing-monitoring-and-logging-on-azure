@@ -90,7 +90,7 @@ stages:
   jobs:
   - job: build_artifacts
     displayName: Build artifacts
-    pool: '
+    pool: 
       vmImage: 'ubuntu-latest'
     steps: 
     - task: ArchiveFiles@2
