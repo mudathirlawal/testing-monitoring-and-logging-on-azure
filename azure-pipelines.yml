@@ -19,7 +19,7 @@ stages:
     # Needed for Terraform VM deployment
     - task: InstallSSHKey@0
       inputs:
-        knownHostsEntry: 'AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
+        knownHostsEntry: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC6YS8ss2pO6WGXOEsY0C0InCf6cGM8CrU2s56+X5UKDYqDQ7jVu331W4GzgKoQE0zTUyvQutrohXhGuihy0R81ghh6/3aE+VzJFP+N6vPPHEbu/TPiNoKcy2c5i5zTxo5iMGXiMGJvtXQcDLJEAE5uJTPiQiBCOjBJNRDW1dE1Ymtnx8VkxXZ00hl2s838jwi/tEn3ANiftnVS8rSxP0Zjng+K4HmSdGXf5znX9i1WPwwfInUGzymsozQdoveFVmJ/v3xaRNHiqmXEez2y4P3Y3Ns4LIy8/5iZGigzfoW3CqIkyWPEZvSWvgdMMCsvHANKRZ5kdhZCfGL1kiHPliFThpjW0/0qV/IxJnup+tGT6as21/R/ipjd56+fIOH3KsTYQ7bU1kNc/dQL9beJwdagr/+s6DbeuVYzUleAvKymWNByOJ5HMYFsWnK7sj7qzYcJpJ3wxALJ9l+nFa38nf3bq2uX2SIphZrWZgWOP+RNSBOkqR1b+3ioQrpD8eN+CPU= mlaw@slate'
         sshPublicKey: $(myPubKey)
         sshKeySecureFile: 'id_rsa'
 
