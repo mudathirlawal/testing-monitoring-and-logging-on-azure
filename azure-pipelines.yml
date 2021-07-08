@@ -43,10 +43,10 @@ stages:
           -reconfigure        
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'                
         backendServiceArm: 'arm-servicon'
-        # backendAzureRmResourceGroupName: 'tstate'
-        # backendAzureRmStorageAccountName: 'tstate1096'
-        # backendAzureRmContainerName: 'tstate'
-        # backendAzureRmKey: 'terraform.tfstate'
+        backendAzureRmResourceGroupName: 'tstate'
+        backendAzureRmStorageAccountName: 'tstate1096'
+        backendAzureRmContainerName: 'tstate'
+        backendAzureRmKey: 'terraform.tfstate'
 
     - task: CopyFiles@2
       displayName: 'Prepare files for publish'
