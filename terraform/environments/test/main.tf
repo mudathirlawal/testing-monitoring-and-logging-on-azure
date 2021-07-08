@@ -8,9 +8,9 @@ terraform {
 }
 terraform {  
   backend "azurerm" {
-    storage_account_name = "tstate1096"
-    container_name       = "tstate"
-    key                  = "terraform.tfstate"
+    # storage_account_name = "tstate1096"
+    # container_name       = "tstate"
+    # key                  = "terraform.tfstate"
   }
 }
 provider "azurerm" {
