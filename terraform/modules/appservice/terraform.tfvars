@@ -15,9 +15,9 @@ address_space = ["10.5.0.0/16"]
 address_prefix_test = "10.5.1.0/24"
 
 # Terraform variables
-# key                  = "terraform.tfstate"
-# storage_account_name = "tstate851"
-# container_name       = "tstate"
+key                  = "terraform.tfstate"
+storage_account_name = "tstate1096"
+container_name       = "tstate"
 
 # Tags
 # tier = "Test"
