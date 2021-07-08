@@ -154,7 +154,7 @@ stages:
               sudo apt-add-repository ppa:universe -y
               sudo apt-get update
               sudo apt-get install python3-pip -y
-              sudo apt-get install unzip -y
+              sudo apt-get install zip unzip -y
               sudo apt-get install -y chromium-browser
               sudo apt-get install -y chromium-chromedriver
               python3 -m pip install --upgrade pip
