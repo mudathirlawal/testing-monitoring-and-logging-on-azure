@@ -32,7 +32,7 @@ stages:
     - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
       displayName: 'Install Terraform'
       inputs:
-        terraformVersion: '1.0.0'
+        terraformVersion: '2.66.0'
 
     - task: TerraformTaskV2@2
       displayName: 'Terraform : Initialization'
