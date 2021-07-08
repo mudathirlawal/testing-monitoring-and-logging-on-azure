@@ -39,8 +39,8 @@ stages:
       inputs:
         backendType: 'azurerm'
         command: 'init'
-        # commandOptions: |
-        #   -reconfigure        
+        commandOptions: |
+          -reconfigure        
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'                
         backendServiceArm: 'arm-servicon'
         backendAzureRmResourceGroupName: 'tstate'
@@ -248,7 +248,7 @@ stages:
       - bash: |
           npm install -g newman
           newman --version
-          mkdir -p log/newman
+          mkdir -p log/newman79f93199-ea71-4fc7-a0c1-a0f75c5ea7e1
         displayName: Install Newman
       - bash: |
           newman run automated-testing/postman/regression-test.json \
