@@ -33,10 +33,11 @@ stages:
       displayName: 'Install Terraform'
       inputs:
         terraformVersion: '2.66.0'
-
+            
     - task: TerraformTaskV2@2
       displayName: 'Terraform : Initialization'
       inputs:
+        provider: "azurerm"
         backendType: 'azurerm'
         command: 'init'
         commandOptions: |
