@@ -148,18 +148,46 @@ stages:
           steps:
           - bash: |
           
-              #! /bin/bash
-              sudo apt update
-              sudo apt install software-properties-common -y
-              sudo apt-add-repository ppa:universe -y
-              sudo apt-get update
+              # #! /bin/bash
+              # sudo apt update
+              # sudo apt install software-properties-common -y
+              # sudo apt-add-repository ppa:universe -y
+              # sudo apt-get update
+              # sudo apt-get install python3-pip -y
+              # sudo apt-get install zip unzip -y
+              # sudo apt-get install -y chromium-browser
+              # sudo apt-get install -y chromium-chromedriver
+              # python3 -m pip install --upgrade pip
+              # pip3 install selenium
+              # python3 -c "import selenium; print('Selenium Version:', selenium.__version__)"
+
+              pwd
+              hostname
+              uname -a
+              cat /etc/*-release
+              sudo apt-get install software-properties-common -y
+              sudo apt-add-repository universe -y
+              sudo apt-get update -y
               sudo apt-get install python3-pip -y
-              sudo apt-get install zip unzip -y
+              sudo apt-get install unzip -y
               sudo apt-get install -y chromium-browser
               sudo apt-get install -y chromium-chromedriver
               python3 -m pip install --upgrade pip
               pip3 install selenium
+              python3 -V
+              pip3 -V
+              /usr/bin/chromium-browser --version
+              /usr/bin/chromedriver --version
               python3 -c "import selenium; print('Selenium Version:', selenium.__version__)"
+              # Install Log Analytics agent on Linux computers (only need to run once)
+              # wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh
+              # sh onboard_agent.sh -w ${AZURE_LOG_ANALYTICS_ID} -s ${AZURE_LOG_ANALYTICS_PRIMARY_KEY}
+              # sudo /opt/microsoft/omsagent/bin/service_control restart ${AZURE_LOG_ANALYTICS_ID}
+            env:  # To use secret variables in a script, we must explicitly map them as environment variables.
+              AZURE_LOG_ANALYTICS_ID: $(AZURE_LOG_ANALYTICS_ID)
+              AZURE_LOG_ANALYTICS_PRIMARY_KEY: $(AZURE_LOG_ANALYTICS_PRIMARY_KEY)
+            displayName: Configure selenium
+
         
 - stage: Test
   jobs:
