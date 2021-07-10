@@ -60,10 +60,9 @@ module "vm" {
   resource_type    = "vm"
   source           = "../../modules/vm"
   location         = "${var.location}"
+  subnet_id        = "${module.network.subnet_id_test}"  
   resource_group   = "${module.resource_group.resource_group_name}"
   application_type = "${var.application_type}"
-  subnet_id        = "${module.network.subnet_id_test}"
-  vm_admin_username = var.vm_admin_username
+  vm_admin_username = "${module.admin_username}"
   public_ip_address_id = "${module.publicip.public_ip_address_id}"
 }
-  
