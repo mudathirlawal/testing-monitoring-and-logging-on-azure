@@ -63,6 +63,6 @@ module "vm" {
   subnet_id        = "${module.network.subnet_id_test}"  
   resource_group   = "${module.resource_group.resource_group_name}"
   application_type = "${var.application_type}"
-  vm_admin_username = "${module.vm.admin_username}"
+  vm_admin_username = "${var.vm_admin_username}"
   public_ip_address_id = "${module.publicip.public_ip_address_id}"
 }
