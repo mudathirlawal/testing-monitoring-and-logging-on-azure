@@ -12,7 +12,7 @@ variable "tenant_id" {
     default = "e9164a2c-aad6-42f3-8414-2ce4840890e9"
 }
 variable "vm_admin_username" {
-    default = "user"
+    default = "azureuser"
 }
 
 # Network
