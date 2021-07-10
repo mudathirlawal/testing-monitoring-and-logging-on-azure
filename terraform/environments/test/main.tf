@@ -15,9 +15,9 @@ terraform {
 }
 provider "azurerm" {
   # tenant_id       = var.tenant_id
-  # subscription_id = var.subscription_id
   # client_id       = var.client_id
   # client_secret   = var.client_secret
+  # subscription_id = var.subscription_id  
   features {}
 }
 module "resource_group" {
@@ -56,3 +56,14 @@ module "publicip" {
   resource_type    = "publicip"
   resource_group   = module.resource_group.resource_group_name
 }
+module "vm" {
+  resource_type    = "vm"
+  source           = "../../modules/vm"
+  location         = "${var.location}"
+  resource_group   = "${module.resource_group.resource_group_name}"
+  application_type = "${var.application_type}"
+  subnet_id        = "${module.network.subnet_id_test}"
+  vm_admin_username = var.vm_admin_username
+  public_ip_address_id = "${module.publicip.public_ip_address_id}"
+}
+  
