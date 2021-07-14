@@ -8,16 +8,16 @@ terraform {
 }
 terraform {  
   backend "azurerm" {
-    # storage_account_name = "tstate1096"
-    # container_name       = "tstate"
-    # key                  = "terraform.tfstate"
+    storage_account_name = "tstate1096"
+    container_name       = "tstate"
+    key                  = "terraform.tfstate"
   }
 }
 provider "azurerm" {
-  # tenant_id       = var.tenant_id
-  # client_id       = var.client_id
-  # client_secret   = var.client_secret
-  # subscription_id = var.subscription_id  
+  tenant_id       = var.tenant_id
+  client_id       = var.client_id
+  client_secret   = var.client_secret
+  subscription_id = var.subscription_id  
   features {}
 }
 module "resource_group" {
