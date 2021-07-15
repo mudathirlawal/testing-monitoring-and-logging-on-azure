@@ -18,7 +18,7 @@
 #   # subscription_id = var.subscription_id
 #   # client_id       = var.client_id
 #   # client_secret   = var.client_secret
-#   features {}
+#   # features {}
 # }
 resource "azurerm_network_interface" "test" {
   name                = "${var.application_type}-${var.resource_type}-nic"
@@ -45,7 +45,7 @@ resource "azurerm_linux_virtual_machine" "test" {
   admin_ssh_key {
     username   = var.vm_admin_username
     # public_key = file("~/.ssh/id_rsa.pub")
-    public_key = file("/home/azureuser/myagent/_work/_temp/id_rsa.pub")
+    public_key = file("/home/azureuser/myagent/_work/_tool/id_rsa.pub")
   }
   
   os_disk {
