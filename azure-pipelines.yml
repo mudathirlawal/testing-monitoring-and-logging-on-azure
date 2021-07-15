@@ -137,8 +137,8 @@ stages:
               appType: 'quality-releases'
               package: $(Pipeline.Workspace)/fakerestapi-atf/fakerestapi-$(Build.BuildId).zip
               deploymentMethod: zipDeploy
-  - deployment: vm_deployment
-    displayName: Deploy virtual machine
+  - deployment: deploy_to_vm
+    displayName: Deploy app to virtual machine
     environment:
       name: 'TEST'
       resourceType: VirtualMachine
