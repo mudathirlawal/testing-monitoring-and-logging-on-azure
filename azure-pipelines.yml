@@ -138,7 +138,7 @@ stages:
               package: $(Pipeline.Workspace)/fakerestapi-atf/fakerestapi-$(Build.BuildId).zip
               deploymentMethod: zipDeploy
   - deployment: deploy_to_vm
-    displayName: Deploy_App_to_VM
+    displayName: DeployAppToVM
     environment:
       name: 'TEST'
       resourceType: VirtualMachine
@@ -157,9 +157,11 @@ stages:
               sudo apt-get install zip unzip -y
               sudo apt-get install -y chromium-browser
               sudo apt-get install -y chromium-chromedriver
+              python3 -m pip install --upgrade pip
               pip3 install selenium
               python3 -c "import selenium; print('Selenium Version:', selenium.__version__)"
-                 
+              export PATH=$PATH:/usr/lib/chromium-browser/
+
 - stage: Test
   jobs:
   - deployment: test_machine
@@ -173,8 +175,8 @@ stages:
           steps:
           - bash: |
               cd $(Pipeline.Workspace)/selenium-atf
-              find . -type f ! -name 'selenium-$(Build.BuildId).zip' -delete  # delete everything except 'selenium-$(Build.BuildId).zip'
-              unzip -o selenium-$(Build.BuildId).zip
+              find . -type f ! -name 'selenium-$(Build.BuildId).zip' -delete 
+              unzip -o $(Pipeline.Workspace)/selenium-atf/$(Build.BuildId)-selenium-tests -d .
               sudo mkdir -p /var/log/selenium
               sudo chmod 664 /var/log/selenium
               sudo python3 -u selenium-test.py 2>&1 | sudo tee -a /var/log/selenium/selenium-test.log
