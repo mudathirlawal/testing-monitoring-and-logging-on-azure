@@ -75,15 +75,6 @@ stages:
     #     backendAzureRmStorageAccountName: 'tstate1096'
     #     backendAzureRmContainerName: 'tstate'
     #     backendAzureRmKey: 'terraform.tfstate'
-    - task: TerraformTaskV1@0
-      displayName: Run `terraform plan`
-      inputs:
-        provider: 'azurerm'
-        command: 'plan'
-        commandOptions: |
-          -auto-approve 
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-        environmentServiceNameAzureRM: 'arm-servicon'
         
     - task: TerraformTaskV1@0
       displayName: Run `terraform apply`
