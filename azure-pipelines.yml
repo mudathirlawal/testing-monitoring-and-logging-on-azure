@@ -77,22 +77,12 @@ stages:
     #     backendAzureRmKey: 'terraform.tfstate'
 
     - task: TerraformTaskV1@0
-      displayName: Run `terraform plan`
-      inputs:
-        provider: 'azurerm'
-        command: 'plan'
-        commandOptions: |
-          -auto-approve -var "subscription_id=$(ARM_SUBSCRIPTION_ID)" -var "client_id=$(ARM_CLIENT_ID)" -var "client_secret=$(ARM_CLIENT_SECRET)" -var "tenant_id=$(ARM_TENANT_ID)" -var "public_key=$(myPubKey)"
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-        environmentServiceNameAzureRM: 'arm-servicon'
-
-    - task: TerraformTaskV1@0
       displayName: Run `terraform apply`
       inputs:
         provider: 'azurerm'
         command: 'apply'
         commandOptions: |
-          -auto-approve -var "subscription_id=$(ARM_SUBSCRIPTION_ID)" -var "client_id=$(ARM_CLIENT_ID)" -var "client_secret=$(ARM_CLIENT_SECRET)" -var "tenant_id=$(ARM_TENANT_ID)" -var "public_key=$(myPubKey)"
+          -auto-approve
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: 'arm-servicon'
 
