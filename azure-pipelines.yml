@@ -138,7 +138,7 @@ stages:
               package: $(Pipeline.Workspace)/fakerestapi-atf/fakerestapi-$(Build.BuildId).zip
               deploymentMethod: zipDeploy
   - deployment: deploy_to_vm
-    displayName: Deploy_app_to_virtual_machine
+    displayName: Deploy_App_to_VM
     environment:
       name: 'TEST'
       resourceType: VirtualMachine
@@ -157,7 +157,6 @@ stages:
               sudo apt-get install zip unzip -y
               sudo apt-get install -y chromium-browser
               sudo apt-get install -y chromium-chromedriver
-              python3 -m pip install --upgrade pip
               pip3 install selenium
               python3 -c "import selenium; print('Selenium Version:', selenium.__version__)"
                  
