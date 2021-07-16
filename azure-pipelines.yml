@@ -205,7 +205,8 @@ stages:
         apache-jmeter-5.4/bin/jmeter -n -t automated-testing/jmeter/stress-test.jmx \
                                     -l log/jmeter/stress-test-result.csv \
                                     -e -f -o log/jmeter/stress-test-html-report \
-                                    -j log/jmeter/jmeter-stress-test.log
+                                    -j log/jmeter/jmeter-stress-test.log \
+                                    -mem 512
       displayName: JMeter stress test
     - bash: |
         apache-jmeter-5.4/bin/jmeter -n -t automated-testing/jmeter/endurance-test.jmx \
