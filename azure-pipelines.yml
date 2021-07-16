@@ -57,24 +57,6 @@ stages:
           **
           !**\.terraform\** 
         TargetFolder: '$(Build.StagingDirectory)'
-
-    # - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
-    #   displayName: 'Terraform : Validation'
-    #   inputs:
-    #     command: validate
-    #     workingDirectory: '/home/azureuser/myagent/_work/_tasks'     
-
-    # - task: TerraformTaskV1@0
-    #   displayName: Terraform Init
-    #   inputs:
-    #     provider: 'azurerm'
-    #     command: 'init'
-    #     workingDirectory: '$(terraformWorkingDirectory)/terraform/environments/test'                
-    #     backendServiceArm: 'arm-servicon'
-    #     backendAzureRmResourceGroupName: 'tstate'
-    #     backendAzureRmStorageAccountName: 'tstate1096'
-    #     backendAzureRmContainerName: 'tstate'
-    #     backendAzureRmKey: 'terraform.tfstate'
         
     - task: TerraformTaskV1@0
       displayName: Run `terraform apply`
