@@ -177,7 +177,7 @@ stages:
     steps:
     - bash: |
         sudo apt-get install openjdk-11-jre-headless -y
-        java -Xmx2G -Xmx2G --version
+        java -mem 512 --version
         wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.4.tgz -O jmeter.tgz
         tar xzvf jmeter.tgz
         apache-jmeter-5.4/bin/jmeter --version2.66.0
