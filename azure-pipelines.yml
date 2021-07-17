@@ -176,7 +176,7 @@ stages:
     pool: Default
     steps:
     - bash: |
-        sudo apt-get install openjdk-11-jre-headless Xmx2G -Xmx2G -y
+        sudo apt-get install openjdk-11-jre-headless -Xmx2G -Xmx2G -y
         java --version
         wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.4.tgz -O jmeter.tgz
         tar xzvf jmeter.tgz
