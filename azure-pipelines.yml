@@ -239,7 +239,7 @@ stages:
                     --reporters cli,junit \
                     --reporter-junit-export log/newman/validation-test.xml
           ls -la $(System.DefaultWorkingDirectory)/log/newman/
-        displayName: Newman validation test
+        displayName: Newman validation tests
       - task: PublishPipelineArtifact@1
         displayName: Publish Newman logs
         inputs:
