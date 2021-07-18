@@ -210,10 +210,10 @@ stages:
         cd /log/jmeter
       displayName: Delete initial JMeter HTML test reports
     - task: PublishPipelineArtifact@1
-      displayName: Publish JMeter logs
       inputs:
         targetPath: '$(System.DefaultWorkingDirectory)/log/jmeter'
         artifactName: 'jmeter-logs-atf'
+      displayName: Publish logs from JMeter tests
   - job: newman_test
     displayName: Test Postman with Newman
     pool: Default
