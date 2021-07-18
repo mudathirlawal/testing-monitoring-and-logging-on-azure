@@ -207,7 +207,7 @@ stages:
     - bash: |
         rm -rf log/jmeter/stress-test-html-report
         rm -rf log/jmeter/endurance-test-html-report
-        cd /log/jmeter/
+        cd log/jmeter/
       displayName: Delete initial JMeter HTML test reports
     - task: PublishPipelineArtifact@1
       inputs:
