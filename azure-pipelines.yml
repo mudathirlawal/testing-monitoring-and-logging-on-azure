@@ -158,12 +158,51 @@ stages:
               cd $(System.DefaultWorkingDirectory)
               mkdir -p log/selenium
               sudo cp /var/log/selenium/selenium-test.log log/selenium/selenium-test.log
-            displayName: Run Selenium tests
+            displayName: Execute functional tests
           - task: PublishPipelineArtifact@1
             displayName: Publish logs from Selenium
             inputs:
               targetPath: '$(System.DefaultWorkingDirectory)/log/selenium/selenium-test.log'
               artifactName: 'selenium-logs-atf'
+  - job: newman_test
+    displayName: Test Postman with Newman
+    pool: Default
+    steps: 
+      - task: NodeTool@0
+        displayName: Install Node v12.X
+        inputs:
+          versionSpec: '12.x'
+      - bash: |
+          npm install -g newman
+          newman --version
+          mkdir -p log/newman79f93199-ea71-4fc7-a0c1-a0f75c5ea7e1
+        displayName: Install Newman
+      - bash: |
+          newman run automated-testing/postman/regression-test.json \
+                    --reporters cli,junit \
+                    --reporter-junit-export log/newman/regression-test.xml \
+                    --suppress-exit-code
+        displayName: Regression tests
+      - bash: |
+          newman run automated-testing/postman/validation-test.json \
+                    -e automated-testing/postman/validation-test-env.postman-environment.json \
+                    --reporters cli,junit \
+                    --reporter-junit-export log/newman/validation-test.xml
+          ls -la $(System.DefaultWorkingDirectory)/log/newman/
+        displayName: Data validation tests
+      - task: PublishPipelineArtifact@1
+        displayName: Publish Newman logs
+        inputs:
+          targetPath: '$(System.DefaultWorkingDirectory)/log/newman'
+          artifactName: 'drop-newman-logs'
+      - task: PublishTestResults@2
+        displayName: 'Publish Newman test results'
+        inputs:
+          testRunner: 'JUnit'
+          searchFolder: '$(System.DefaultWorkingDirectory)/log/newman'
+          testResultsFiles: '*.xml'
+          mergeTestResults: true
+          testRunTitle: 'Publish Newman test results'
   - job: jmeter_test
     displayName: Test JMeter
     pool: Default
@@ -214,42 +253,3 @@ stages:
         targetPath: '$(System.DefaultWorkingDirectory)/log/jmeter'
         artifactName: 'jmeter-logs-atf'
       displayName: Publish logs from JMeter tests
-  - job: newman_test
-    displayName: Test Postman with Newman
-    pool: Default
-    steps: 
-      - task: NodeTool@0
-        displayName: Install Node v12.X
-        inputs:
-          versionSpec: '12.x'
-      - bash: |
-          npm install -g newman
-          newman --version
-          mkdir -p log/newman79f93199-ea71-4fc7-a0c1-a0f75c5ea7e1
-        displayName: Install Newman
-      - bash: |
-          newman run automated-testing/postman/regression-test.json \
-                    --reporters cli,junit \
-                    --reporter-junit-export log/newman/regression-test.xml \
-                    --suppress-exit-code
-        displayName: Newman regression test
-      - bash: |
-          newman run automated-testing/postman/validation-test.json \
-                    -e automated-testing/postman/validation-test-env.postman-environment.json \
-                    --reporters cli,junit \
-                    --reporter-junit-export log/newman/validation-test.xml
-          ls -la $(System.DefaultWorkingDirectory)/log/newman/
-        displayName: Newman validation tests
-      - task: PublishPipelineArtifact@1
-        displayName: Publish Newman logs
-        inputs:
-          targetPath: '$(System.DefaultWorkingDirectory)/log/newman'
-          artifactName: 'drop-newman-logs'
-      - task: PublishTestResults@2
-        displayName: 'Publish Newman test results'
-        inputs:
-          testRunner: 'JUnit'
-          searchFolder: '$(System.DefaultWorkingDirectory)/log/newman'
-          testResultsFiles: '*.xml'
-          mergeTestResults: true
-          testRunTitle: 'Publish Newman test results'
