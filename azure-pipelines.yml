@@ -175,18 +175,18 @@ stages:
       - bash: |
           npm install -g newman
           newman --version
-          mkdir -p log/newman79f93199-ea71-4fc7-a0c1-a0f75c5ea7e1
+          mkdir -p log/newman
         displayName: Install Newman
       - bash: |
           newman run automated-testing/postman/regression-test.json \
-                    --reporters cli,junit \
+                    # --reporters cli,junit \
                     --reporter-junit-export log/newman/regression-test.xml \
-                    --suppress-exit-code
+                    # --suppress-exit-code
         displayName: Regression tests
       - bash: |
           newman run automated-testing/postman/validation-test.json \
-                    -e automated-testing/postman/validation-test-env.postman-environment.json \
-                    --reporters cli,junit \
+                    # -e automated-testing/postman/validation-test-env.postman-environment.json \
+                    # --reporters cli,junit \
                     --reporter-junit-export log/newman/validation-test.xml
           ls -la $(System.DefaultWorkingDirectory)/log/newman/
         displayName: Data validation tests
@@ -217,15 +217,15 @@ stages:
       displayName: Install JMeter
     - bash: |
         apache-jmeter-5.4/bin/jmeter -n -t automated-testing/jmeter/stress-test.jmx \
-                                    -l log/jmeter/stress-test-result.csv \
+                                    # -l log/jmeter/stress-test-result.csv \
                                     -e -f -o log/jmeter/stress-test-html-report \
-                                    -j log/jmeter/jmeter-stress-test.log
+                                    # -j log/jmeter/jmeter-stress-test.log
       displayName: JMeter stress test
     - bash: |
         apache-jmeter-5.4/bin/jmeter -n -t automated-testing/jmeter/endurance-test.jmx \
-                                    -l log/jmeter/endurance-test-result.csv \
+                                    # -l log/jmeter/endurance-test-result.csv \
                                     -e -f -o log/jmeter/endurance-test-html-report \
-                                    -j log/jmeter/jmeter-endurance-test.log
+                                    # -j log/jmeter/jmeter-endurance-test.log
       displayName: JMeter endurance test
     - task: ArchiveFiles@2
       displayName: Archive JMeter stress test HTML report
