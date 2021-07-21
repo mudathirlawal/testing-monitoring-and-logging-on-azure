@@ -1,6 +1,10 @@
 [![Build Status](https://dev.azure.com/kehindealimi/QualityReleases/_apis/build/status/mudathirlawal.testing-monitoring-and-logging-on-azure?branchName=ops)](https://dev.azure.com/kehindealimi/QualityReleases/_build/latest?definitionId=2&branchName=ops)
 
 # Testing, Monitoring, and Logging on Azure
+
+## Overview:
+![Project workflow overview](workflow-clips/project_overview.png)
+
 This project demonstrates how to ensure `quality releases` using Azure cloud through the implementation of automated testing, performance monitoring and logging using Azure DevOps, Apache JMeter, Selenium, Postman and Terraform.
 
 ## Configure Environment & Deploy Infrastructure
@@ -29,53 +33,16 @@ https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/ser
     client_secret
     tenant_id
     ```
-3. Navigate to the environment / test directory, then run `terraform init`, `terraform plan`, and `terraform apply` apply.
 
-```bash
-cd terraform/environment/test
-terraform init
-terraform plan -out solution.plan
-terraform apply "solution.plan"
-```
-
-### Azure DevOps
-
-Import the build configuration file, `azure-pipelines.yaml`, into Azure DevOps.
-
-Follow the instructions to create a new Azure Pipeline from the `azure-pipelines.yaml` file. https://docs.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline?view=azure-devops&tabs=java%2Ctfs-2018-2%2Cbrowser
-
-### Selenium
-
-1. Download the latest Chrome driver. https://sites.google.com/a/chromium.org/chromedriver/
-
-    ```
-    pip install -U selenium
-    sudo apt-get install -y chromium-browser
-    ```
-    IMPORTANT You will need to add the chromedriver to PATH. https://sites.google.com/a/chromium.org/chromedriver/getting-started
-
-2. In the Project Starter Resources folder, in the Selenium folder, execute the login.py file to open the demo site.
-
-### JMeter
-
-1. Install JMeter.
-2. Use JMeter to open the Starter.jmx file in the “Project Starter Resources” JMeter folder.
-3. Replace the APPSERVICEURL with the URL of your AppService once it's deployed.
-
-### Postman
-
-1. Install Postman.
-2. Import into Postman the starterAPIs.json collection from the Project Starter Resources.
-
-### Dev Environment
-
-1. Open the files in the Project Starter Resources folder using the IDE of your choice.
-2. Complete the "Getting Started,” and each of the "Installation" sections.
 3. Create an SSH key pair for the linux machine. Use the reference to the file for the Dev Environment. Use the actual public key itself when using Terraform in the CI/CD pipeline.
-4. Run the terraform commands to create the resources in Azure.
-    ```
-    .\path\to\terraform\terraform.exe init
-    .\path\to\terraform\terraform.exe apply
+
+4. Navigate to the environment / test directory, then run `terraform init`, `terraform plan`, and `terraform apply` apply. And run the following terraform commands to create the resources in Azure.
+
+    ```bash
+    cd terraform/environment/test
+    terraform init
+    terraform plan -out solution.plan
+    terraform apply "solution.plan"
     ```
     Note that the deployment to the VM will fail since it is not configured as a deployment target yet.
 
@@ -91,13 +58,48 @@ Follow the instructions to create a new Azure Pipeline from the `azure-pipelines
     cd ..
     sudo rm -rf azagent
     ```
-- Run the registration script again.
-- Add your user to the sudoers file.
+    - Run the registration script again.
+    - Add your user to the sudoers file.
 
-7. Update azure-pipelines.yaml with the Environment, and run the pipeline. You can now deploy to the Linux VM.
-8. Configure Logging for the VM in the Azure Portal.
+6. Update azure-pipelines.yaml with the Environment, and run the pipeline. You can now deploy to the Linux VM.
+7. Configure Logging for the VM in the Azure Portal.
 
-9. Direct the output of the Selenium test suite to a log file, and execute the - Test Suite. Configure custom logging in Azure Monitor to ingest this log file.
+8. Direct the output of the Selenium test suite to a log file, and execute the - Test Suite. Configure custom logging in Azure Monitor to ingest this log file.
+
+### Azure DevOps
+
+Import the build configuration file, `azure-pipelines.yaml`, into Azure DevOps.
+
+Follow [these instructions](https://docs.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline?view=azure-devops&tabs=java%2Ctfs-2018-2%2Cbrowser) to create a new Azure Pipeline from the `azure-pipelines.yaml` file. 
+
+### Selenium
+
+1. Download the latest Chrome driver [following this](https://docs.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline?view=azure-devops&tabs=java%2Ctfs-2018-2%2Cbrowser). 
+
+    ```
+    pip install -U selenium
+    sudo apt-get install -y chromium-browser
+    ```
+
+    IMPORTANT: You will aslo need to add the chromedriver to PATH [as decribed here](https://sites.google.com/a/chromium.org/chromedriver/getting-started). 
+
+2. In the Project Starter Resources folder, in the Selenium folder, execute the login.py file to open the demo site.
+
+### JMeter
+
+1. Install JMeter.
+2. Use JMeter to open the Starter.jmx file in the “Project Starter Resources” JMeter folder.
+3. Replace the APPSERVICEURL with the URL of your AppService once it's deployed.
+
+### Postman
+
+1. Install Postman.
+2. Import into Postman the starterAPIs.json collection from the Project Starter Resources.
+
+### Development Environment
+
+1. Open the files in the Project Starter Resources folder using the IDE of your choice.
+2. Complete the "Getting Started,” and each of the "Installation" sections.
 
 ## Monitoring & Observability
 Configure Azure Log Analytics to consume and aggregate custom application events in order to determine and address root causes of operational issues.
