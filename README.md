@@ -103,32 +103,25 @@ Follow [these instructions](https://docs.microsoft.com/en-us/azure/devops/pipeli
 Configure Azure Log Analytics to consume and aggregate custom application events in order to determine and address root causes of operational issues.
 
 ### Terraform:
-![Terraform](workflow-clips/terraform.png)
+![Terraform](workflow-clips/terraform_output_in_pipeline.png)
 
 ### FakeRestAPI
-![FakeRestAPI](workflow-clips/fakerestapi.png)
+![FakeRestAPI](workflow-clips/deployed_fakerestapi.png)
 
 ### Pipeline Build:
-![Pipeline build](workflow-clips/pipeline_build.png)
+![Pipeline build](workflow-clips/successful_execution_of_pipeline.png)
 
 ### JMeter Endurance Test:                                                                       
-![Endurance test](workflow-clips/endurance_test.png)
+![Endurance test](workflow-clips/jmeter_endurance_test.png)
 
 ### JMeter Stress Test:
-![Stress test](workflow-clips/stress_test.png)
+![Stress test](workflow-clips/jmeter_stress_test.png)
 
 ### Selenium:
-![Selenium test](workflow-clips/selenium_test.png)
+![Selenium test](workflow-clips/selenium_tests.png)
 
 ### Integration Test:
-![Regression test](workflow-clips/regression_test.png)
+![Regression test](workflow-clips/regression_tests.png)
 
 ### Validation Test:
-![Validation test](workflow-clips/validation_test.png)
-
-### Appservice:
-![Azure monitor](workflow-clips/appservice1.png)
-![Azure monitor](workflow-clips/appservice2.png)
-
-### Log Analytics:
-![Azure monitor](workflow-clips/selenium-logs.png)
+![Validation test](workflow-clips/validation_tests.png)
