@@ -2,7 +2,6 @@
 
 # Testing, Monitoring, and Logging on Azure
 
-## Overview:
 ![Project workflow overview](workflow-clips/project_overview.png)
 
 This project demonstrates how to ensure `quality releases` using Azure cloud through the implementation of automated testing, performance monitoring and logging using Azure DevOps, Apache JMeter, Selenium, Postman and Terraform.
@@ -48,10 +47,10 @@ https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/ser
 
 5. Configure the Linux VM for deployment:
 
-- SSH into the VM using the Public IP
-- Alternatively, you can use the 'Reset Password' function in Azure for the VM resource and then try SSH using those credentials.
-- Follow the instructions to create an environment in Azure DevOps
-- If the registration script shows "sudo: ./svc.sh: command not found":
+    - SSH into the VM using the Public IP
+    - Alternatively, you can use the 'Reset Password' function in Azure for the VM resource and then try SSH using those credentials.
+    - Follow the instructions to create an environment in Azure DevOps
+    - If the registration script shows "sudo: ./svc.sh: command not found":
 
     ```
     sudo bin/installdependencies.sh
