@@ -185,7 +185,6 @@ stages:
         displayName: Regression tests
       - bash: |
           newman run automated-testing/postman/validation-test.json \
-                    # -e automated-testing/postman/validation-test-env.postman-environment.json \
                     --reporters cli,junit \
                     --reporter-junit-export log/newman/validation-test.xml
           ls -la $(System.DefaultWorkingDirectory)/log/newman/

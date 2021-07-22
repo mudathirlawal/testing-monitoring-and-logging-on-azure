@@ -15,7 +15,7 @@ Using Azure CLI and Terraform, we shall construct Infrastructure as Code (IaC) t
 
 ## Terraform in Azure
 
-1. Configure the storage account and state backend. https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage Replace the values below in terraform/environments/test/main.tf with the output from the Azure CLI:
+1. Configure the storage account and state backend as described in [this tutorial.](https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage ). Replace the values below in terraform/environments/test/main.tf with the output from the Azure CLI:
 
     ```
     storage_account_name
