@@ -6,7 +6,7 @@
 
 This project demonstrates how to ensure `quality releases` using Azure cloud through the implementation of automated testing, performance monitoring and logging using Azure DevOps, Apache JMeter, Selenium, Postman and Terraform.
 
-## Configure Environment & Deploy Infrastructure
+## Configure Environment and Deploy Infrastructure
 Using Azure CLI and Terraform, we shall construct Infrastructure as Code (IaC) that allows us to carry out several tests on the deployed application, thereby ensuring that we always have a high quality release at any moment. 
 
 - Configure Authentication via Service Principal and Client Secret
@@ -64,7 +64,7 @@ Using Azure CLI and Terraform, we shall construct Infrastructure as Code (IaC) t
 
 8. Direct the output of the Selenium test suite to a log file, and execute the - Test Suite. Configure custom logging in Azure Monitor to ingest this log file.
 
-### Azure DevOps
+### Azure DevOps: Continuous Integration & Testing
 
 Import the build configuration file, `azure-pipelines.yaml`, into Azure DevOps.
 
@@ -72,7 +72,7 @@ Follow [these instructions](https://docs.microsoft.com/en-us/azure/devops/pipeli
 
 ### Selenium
 
-1. Download the latest Chrome driver [following this](https://docs.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline?view=azure-devops&tabs=java%2Ctfs-2018-2%2Cbrowser). 
+1. Download the latest Chrome driver following [this](https://docs.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline?view=azure-devops&tabs=java%2Ctfs-2018-2%2Cbrowser). 
 
     ```
     pip install -U selenium
@@ -94,13 +94,8 @@ Follow [these instructions](https://docs.microsoft.com/en-us/azure/devops/pipeli
 1. Install Postman.
 2. Import into Postman the starterAPIs.json collection from the Project Starter Resources.
 
-### Development Environment
-
-1. Open the files in the Project Starter Resources folder using the IDE of your choice.
-2. Complete the "Getting Started,” and each of the "Installation" sections.
-
 ## Monitoring & Logging
-Configure Azure Log Analytics to consume and aggregate custom application events in order to determine and address root causes of operational issues.
+Configure Azure Log Analytics to consume and aggregate custom application events in order to discover root causes of operational faults, and subsequently address them.
 
 ### Terraform:
 ![Terraform](workflow-clips/terraform_output_in_pipeline.png)
