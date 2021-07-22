@@ -11,7 +11,7 @@ Using Azure CLI and Terraform, we shall construct Infrastructure as Code (IaC) t
 
 - Configure Authentication via Service Principal and Client Secret
 
-  Create a service principal which grants terraform the permission to manages resources in your subscription as described by HashiCorp in [this walkthrough.](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret)
+  Create a service principal which grants terraform the permission to manages resources in your subscription, as described by HashiCorp in [this walkthrough.](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret)
 
 ## Terraform in Azure
 
@@ -79,7 +79,7 @@ Follow [these instructions](https://docs.microsoft.com/en-us/azure/devops/pipeli
     sudo apt-get install -y chromium-browser
     ```
 
-    IMPORTANT: You will aslo need to add the chromedriver to PATH [as decribed here](https://sites.google.com/a/chromium.org/chromedriver/getting-started). 
+    IMPORTANT: You will aslo need to add the chromedriver to PATH, as decribed [here](https://sites.google.com/a/chromium.org/chromedriver/getting-started). 
 
 2. In the Project Starter Resources folder, in the Selenium folder, execute the login.py file to open the demo site.
 
@@ -99,7 +99,7 @@ Follow [these instructions](https://docs.microsoft.com/en-us/azure/devops/pipeli
 1. Open the files in the Project Starter Resources folder using the IDE of your choice.
 2. Complete the "Getting Started,” and each of the "Installation" sections.
 
-## Monitoring & Observability
+## Monitoring & Logging
 Configure Azure Log Analytics to consume and aggregate custom application events in order to determine and address root causes of operational issues.
 
 ### Terraform:
