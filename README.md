@@ -15,7 +15,7 @@ Using Azure CLI and Terraform, we shall construct Infrastructure as Code (IaC) t
 
 ## Terraform in Azure
 
-1. Configure the storage account and state backend as described in [this tutorial.](https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage) Replace the values below in terraform/environments/test/main.tf with the output from the Azure CLI:
+1. Configure the storage account and state backend, as described in [this tutorial.](https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage) Replace the values below in terraform/environments/test/main.tf with the output from the Azure CLI:
 
     ```
     storage_account_name
@@ -23,7 +23,7 @@ Using Azure CLI and Terraform, we shall construct Infrastructure as Code (IaC) t
     access_key
     ```
 
-2. Create a Service Principal for Terraform Replace the below values in terraform/environments/test/terraform.tfvars with the output from the Azure CLI [as described here](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret).
+2. Create a Service Principal for Terraform Replace the below values in terraform/environments/test/terraform.tfvars with the output from the Azure CLI, as described [here](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret).
 
     ```
     subscription_id
