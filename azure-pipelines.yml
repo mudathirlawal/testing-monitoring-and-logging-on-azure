@@ -8,7 +8,7 @@ stages:
 - stage: Provision
   jobs:
   - job: provision_azure_resources
-    displayName: Provision Azure resources
+    displayName: ProvisionAzureResources
     pool: Default 
     steps:
     - task: DownloadSecureFile@1
@@ -23,7 +23,7 @@ stages:
         sshKeySecureFile: 'id_rsa'
 
     - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
-      displayName: 'Install Terraform'
+      displayName: 'InstallTerraform'
       inputs:
         terraformVersion: '0.15.0'
             
@@ -68,7 +68,7 @@ stages:
     pool: Default 
     steps: 
     - task: ArchiveFiles@2
-      displayName: Archive FakeRestAPI
+      displayName: ArchiveFakeRestAPI
       inputs:
         rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automated-testing/jmeter/fakerestapi'
         includeRootFolder: false
@@ -76,7 +76,7 @@ stages:
         archiveFile: '$(Build.ArtifactStagingDirectory)/fakerestapi-$(Build.BuildId).zip'
         verbose: true
     - task: PublishPipelineArtifact@1
-      displayName: Publish FakeRestAPI artifact
+      displayName: PublishFakeRestAPIArtifact
       inputs:
         targetPath: '$(Build.ArtifactStagingDirectory)/fakerestapi-$(Build.BuildId).zip'
         artifactName: 'fakerestapi-atf'
@@ -89,7 +89,7 @@ stages:
         archiveFile: '$(Build.ArtifactStagingDirectory)/selenium-$(Build.BuildId).zip'
         verbose: true
     - task: PublishPipelineArtifact@1
-      displayName: Publish Selenium artifact
+      displayName: Publish Selenium Artifact
       inputs:
         targetPath: '$(Build.ArtifactStagingDirectory)/selenium-$(Build.BuildId).zip'
         artifactName: 'selenium-atf'
@@ -97,7 +97,7 @@ stages:
 - stage: Deployment
   jobs:
   - deployment: deployment_fakerestapi
-    displayName: Deploy FakeRestAPI
+    displayName: DeployFakeRestAPI
     pool: Default
     environment: 'TEST'
     strategy:
@@ -105,7 +105,7 @@ stages:
         deploy:
           steps:
           - task: AzureWebApp@1
-            displayName: Deploy Azure WebApp
+            displayName: DeployAzureWebApp
             inputs:
               azureSubscription: 'arm-servicon'
               appName: 'quality-releases-appservice'
@@ -149,12 +149,11 @@ stages:
         deploy:
           steps:
           - bash: |
-              cd $(Pipeline.Workspace)/selenium-atf
-              sudo apt-get install zip unzip -y
+              cd /home/azureuser/myagent/_work/1/selenium-atf
               find . -type f ! -name 'selenium-$(Build.BuildId).zip' -delete 
               unzip -o $(Pipeline.Workspace)/selenium-atf/$(Build.BuildId) -d .
               sudo mkdir -p /var/log/selenium && sudo chmod 664 /var/log/selenium
-              sudo python3 -u ui_tests.py 2>&1 | sudo dd of=/var/log/selenium/ui_tests.log
+              sudo python3 -u ui_tests.py | sudo dd of=/var/log/selenium/ui_tests.log
               cd $(System.DefaultWorkingDirectory)
               mkdir -p log/selenium
               sudo cp /var/log/selenium/ui_tests.log log/selenium/ui_tests.log
