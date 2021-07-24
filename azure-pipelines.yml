@@ -150,6 +150,7 @@ stages:
           steps:
           - bash: |
               cd $(Pipeline.Workspace)/selenium-atf
+              sudo apt-get install zip unzip -y
               find . -type f ! -name 'selenium-$(Build.BuildId).zip' -delete 
               unzip -o $(Pipeline.Workspace)/selenium-atf/$(Build.BuildId) -d .
               sudo mkdir -p /var/log/selenium && sudo chmod 664 /var/log/selenium
