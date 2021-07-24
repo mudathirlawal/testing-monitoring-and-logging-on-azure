@@ -18,7 +18,7 @@ def login( user, password, driver ):
     driver.get('https://www.saucedemo.com/')
 
 def add_product_to_cart( driver ):
-    products = driver.find_element_by_class_name('inventory_item')
+    product = driver.find_element_by_class_name('inventory_item')
     add_to_cart_button = driver.find_element_by_xpath(
         "//input[@name='continue'][@type='button']")
 
