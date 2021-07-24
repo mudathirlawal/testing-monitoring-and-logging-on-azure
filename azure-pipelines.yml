@@ -158,7 +158,7 @@ stages:
               cd $(System.DefaultWorkingDirectory)
               mkdir -p log/selenium
               sudo cp /var/log/selenium/selenium-test.log log/selenium/selenium-test.log
-            displayName: Execute functional tests
+            displayName: Execute UI functional tests
           - task: PublishPipelineArtifact@1
             displayName: Publish logs from Selenium
             inputs:
