@@ -149,7 +149,7 @@ stages:
         deploy:
           steps:
           - bash: |
-              cd /home/azureuser/myagent/_work/1/selenium-atf
+              cd $(Pipeline.Workspace)/selenium-atf
               find . -type f ! -name 'selenium-$(Build.BuildId).zip' -delete 
               unzip -o $(Pipeline.Workspace)/selenium-atf/$(Build.BuildId) -d .
               sudo mkdir -p /var/log/selenium && sudo chmod 664 /var/log/selenium
