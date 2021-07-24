@@ -25,7 +25,7 @@ def login( user, password, driver ):
 login('standard_user', 'secret_sauce')
 
 def add_all_products_to_cart():
-    products = driver.find_element_by_class_name('inventory_list')
+    products = driver.find_element_by_class_name('inventory_item')
     
 
 # driver.find_element_by_xpath(
