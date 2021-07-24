@@ -3,7 +3,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
-
 # Start the browser:
 def set_up_driver():
     print ('Starting the browser...')
@@ -13,21 +12,24 @@ def set_up_driver():
     print ('Browser started successfully!')
     return driver
 
-# Make `driver` variable global:
-driver = set_up_driver()
-
 # Define login:
 def login( user, password, driver ):
     print ('Navigating to the demo page to login ...')
     driver.get('https://www.saucedemo.com/')
 
-# Login as `standard_user`:
-login('standard_user', 'secret_sauce')
-
 def add_product_to_cart( driver ):
     products = driver.find_element_by_class_name('inventory_item')
     add_to_cart_button = driver.find_element_by_xpath(
         "//input[@name='continue'][@type='button']")
+
+# Make `driver` variable global:
+driver = set_up_driver()
+
+# Login as `standard_user`:
+login('standard_user', 'secret_sauce')
+
+
+
 
 # driver.find_element_by_xpath(
 #     "//div[@class='nav-search-submit nav-sprite']//input[@class='nav-input']"
