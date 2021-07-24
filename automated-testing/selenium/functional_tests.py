@@ -26,7 +26,8 @@ login('standard_user', 'secret_sauce')
 
 def add_all_products_to_cart():
     products = driver.find_element_by_class_name('inventory_item')
-    
+    add_to_cart_button = driver.find_element_by_xpath(
+        "//input[@name='continue'][@type='button']")
 
 # driver.find_element_by_xpath(
 #     "//div[@class='nav-search-submit nav-sprite']//input[@class='nav-input']"
