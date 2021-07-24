@@ -154,15 +154,15 @@ stages:
               unzip -o $(Pipeline.Workspace)/selenium-atf/$(Build.BuildId)-selenium-tests -d .
               sudo mkdir -p /var/log/selenium
               sudo chmod 664 /var/log/selenium
-              sudo python3 -u selenium-test.py 2>&1 | sudo tee -a /var/log/selenium/selenium-test.log
+              sudo python3 -u ui_tests.py | sudo dd of=/var/log/selenium/ui_tests.log
               cd $(System.DefaultWorkingDirectory)
               mkdir -p log/selenium
-              sudo cp /var/log/selenium/selenium-test.log log/selenium/selenium-test.log
-            displayName: Execute UI functional tests
+              sudo cp /var/log/selenium/ui_tests.log log/selenium/ui_tests.log
+            displayName: Execute UI functional tests using Selenium
           - task: PublishPipelineArtifact@1
             displayName: Publish logs from Selenium
             inputs:
-              targetPath: '$(System.DefaultWorkingDirectory)/log/selenium/selenium-test.log'
+              targetPath: '$(System.DefaultWorkingDirectory)/log/selenium/ui_tests.log'
               artifactName: 'selenium-logs-atf'
   - job: newman_test
     displayName: Test Postman with Newman
