@@ -24,7 +24,7 @@ def login( user, password, driver ):
 # Login as `standard_user`:
 login('standard_user', 'secret_sauce')
 
-def add_all_products_to_cart( driver ):
+def add_product_to_cart( driver ):
     products = driver.find_element_by_class_name('inventory_item')
     add_to_cart_button = driver.find_element_by_xpath(
         "//input[@name='continue'][@type='button']")
