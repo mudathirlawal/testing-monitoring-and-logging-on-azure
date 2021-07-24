@@ -64,7 +64,7 @@ stages:
 - stage: Build
   jobs:
   - job: build_artifacts
-    displayName: Build artifacts
+    displayName: BuildArtifacts
     pool: Default 
     steps: 
     - task: ArchiveFiles@2
@@ -139,8 +139,8 @@ stages:
 
 - stage: Test
   jobs:
-  - deployment: execute_ui_tests
-    displayName: Execute_UI_Tests
+  - deployment: run_ui_tests
+    displayName: RunUITestsOnApp
     environment:
       name: 'TEST'
       resourceType: VirtualMachine
@@ -149,11 +149,11 @@ stages:
         deploy:
           steps:
           - bash: |
-              cd $(Pipeline.Workspace)/drop-selenium
+              cd $(Pipeline.Workspace)/selenium-atf
               find . -type f ! -name 'selenium-$(Build.BuildId).zip' -delete 
-              unzip -o $(Pipeline.Workspace)/drop-selenium/$(Build.BuildId) -d .
+              unzip -o $(Pipeline.Workspace)/selenium-atf/$(Build.BuildId) -d .
               sudo mkdir -p /var/log/selenium && sudo chmod 664 /var/log/selenium
-              sudo python3 -u ui_tests.py | sudo dd of=/var/log/selenium/ui_tests.log
+              sudo python3 -u ui_tests.py 2>&1 | sudo dd of=/var/log/selenium/ui_tests.log
               cd $(System.DefaultWorkingDirectory)
               mkdir -p log/selenium
               sudo cp /var/log/selenium/ui_tests.log log/selenium/ui_tests.log
