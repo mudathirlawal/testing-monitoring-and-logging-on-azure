@@ -139,8 +139,8 @@ stages:
 
 - stage: Test
   jobs:
-  - deployment: test_machine
-    displayName: Test VM
+  - deployment: execute_ui_tests
+    displayName: Execute UI Tests
     environment:
       name: 'TEST'
       resourceType: VirtualMachine
@@ -151,12 +151,12 @@ stages:
           - bash: |
               cd $(Pipeline.Workspace)/selenium-atf
               find . -type f ! -name 'selenium-$(Build.BuildId).zip' -delete 
-              unzip -o $(Pipeline.Workspace)/selenium-atf/$(Build.BuildId)-ui-tests -d .
+              unzip -o $(Pipeline.Workspace)/selenium-atf/$(Build.BuildId) -d .
               sudo mkdir -p /var/log/selenium && sudo chmod 664 /var/log/selenium
               sudo python3 -u ui_tests.py | sudo dd of=/var/log/selenium/ui_tests.log
               cd $(System.DefaultWorkingDirectory)
               mkdir -p log/selenium
-              sudo mv /var/log/selenium/ui_tests.log log/selenium/ui_tests.log
+              sudo cp /var/log/selenium/ui_tests.log log/selenium/ui_tests.log
             displayName: Execute UI functional tests using Selenium
           - task: PublishPipelineArtifact@1
             displayName: Publish logs from Selenium
