@@ -20,22 +20,10 @@ def login( user, password, driver ):
 def add_product_to_cart( driver ):
     product = driver.find_element_by_class_name('inventory_item')
     add_to_cart_button = driver.find_element_by_xpath(
-        "//input[@name='continue'][@type='button']")
-
+        "//div[@class='btn_inventory']").click()
+    
 # Make `driver` variable global:
 driver = set_up_driver()
 
 # Login as `standard_user`:
 login('standard_user', 'secret_sauce')
-
-
-
-
-# driver.find_element_by_xpath(
-#     "//div[@class='nav-search-submit nav-sprite']//input[@class='nav-input']"
-#     ).click()
-# driver.find_element_by_xpath(
-#     "//span[contains(text(), 'Samsung 80 cm (32 Inches) Series 4 Ready LED TV']"
-#     ).click()
-
-
