@@ -135,9 +135,7 @@ stages:
               python3 -m pip install --upgrade pip
               sudo pip3 install selenium
               python3 -c "import selenium; print('Selenium Version:', selenium.__version__)"
-              export PATH=$PATH:/usr/lib/chromium-browser/
-              sudo chown root:root /usr/local/bin/chromedriver
-              sudo chmod 0755 /usr/local/bin/chromedriver              
+              export PATH=$PATH:/usr/lib/chromium-browser/       
 
 - stage: Test
   jobs:
