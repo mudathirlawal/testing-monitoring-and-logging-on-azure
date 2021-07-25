@@ -28,7 +28,7 @@ stages:
         terraformVersion: '0.15.0'
             
     - task: TerraformTaskV2@2
-      displayName: 'Terraform : Initialization'
+      displayName: 'Terraform: Initialization'
       inputs:
         provider: "azurerm"
         backendType: 'azurerm'
@@ -202,9 +202,9 @@ stages:
           searchFolder: '$(System.DefaultWorkingDirectory)/log/newman'
           testResultsFiles: '*.xml'
           mergeTestResults: true
-          testRunTitle: 'Publish Newman test results'
-  - job: load_test
-    displayName: LoadTesting
+          testRunTitle: 'PublishNewmanTestResults'
+  - job: performance_tests
+    displayName: PerformanceTests
     pool: Default
     steps:
     - bash: |
@@ -220,7 +220,7 @@ stages:
                                     -l log/jmeter/stress-test-result.csv \
                                     -e -f -o log/jmeter/stress-test-html-report \
                                     -j log/jmeter/jmeter-stress-test.log
-      displayName: Stress Test
+      displayName: Spike Test
     - bash: |
         apache-jmeter-5.4/bin/jmeter -n -t automated-testing/jmeter/endurance-test.jmx \
                                     -l log/jmeter/endurance-test-result.csv \
