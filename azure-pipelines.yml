@@ -7,8 +7,8 @@ variables:
 stages: 
 - stage: Provision
   jobs:
-  - job: provision_azure_resources
-    displayName: ProvisionAzureResources
+  - job: provision_az_resources
+    displayName: ProvisionAzResources
     pool: Default 
     steps:
     - task: DownloadSecureFile@1
@@ -89,7 +89,7 @@ stages:
         archiveFile: '$(Build.ArtifactStagingDirectory)/selenium-$(Build.BuildId).zip'
         verbose: true
     - task: PublishPipelineArtifact@1
-      displayName: Publish Selenium Artifact
+      displayName: PublishSeleniumArtifact
       inputs:
         targetPath: '$(Build.ArtifactStagingDirectory)/selenium-$(Build.BuildId).zip'
         artifactName: 'selenium-atf'
@@ -151,7 +151,7 @@ stages:
           - bash: |
               cd $(Pipeline.Workspace)/selenium-atf
               find . -type f ! -name 'selenium-$(Build.BuildId).zip' -delete 
-              unzip -o $(Pipeline.Workspace)/selenium-atf/$(Build.BuildId) -d .
+              unzip -o $(Pipeline.Workspace)/selenium-atf/selenium-$(Build.BuildId) -d .
               sudo mkdir -p /var/log/selenium && sudo chmod 664 /var/log/selenium
               sudo python3 -u ui_tests.py | sudo dd of=/var/log/selenium/ui_tests.log
               cd $(System.DefaultWorkingDirectory)
