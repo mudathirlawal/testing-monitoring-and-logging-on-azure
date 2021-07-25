@@ -131,13 +131,17 @@ stages:
               sudo apt-get install zip unzip -y
               sudo apt-get install -y chromium-browser
               sudo apt-get install -y chromium-chromedriver
-              sudo apt-get install python3-pip -y
+              # sudo apt-get install python3-pip -y
+
+              sudo pip install -U selenium
+
               # sudo python3 -m pip install --upgrade pip
               # sudo python3 -m pip install selenium
-              wget https://files.pythonhosted.org/packages/ed/9c/9030520bf6ff0b4c98988448a93c04fcbd5b13cd9520074d8ed53569ccfe/selenium-3.141.0.tar.gz
-              tar -zxvf selenium-3.141.0.tar.gz 
-              cd selenium-3.141.0/
-              python3 setup.py install                            
+
+              # wget https://files.pythonhosted.org/packages/ed/9c/9030520bf6ff0b4c98988448a93c04fcbd5b13cd9520074d8ed53569ccfe/selenium-3.141.0.tar.gz
+              # tar -zxvf selenium-3.141.0.tar.gz 
+              # cd selenium-3.141.0/
+              # python3 setup.py install                            
               python3 -c "import selenium; print('Selenium Version:', selenium.__version__)"    
 
 - stage: Test
