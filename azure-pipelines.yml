@@ -81,7 +81,7 @@ stages:
         targetPath: '$(Build.ArtifactStagingDirectory)/fakerestapi-$(Build.BuildId).zip'
         artifactName: 'fakerestapi-atf'
     - task: ArchiveFiles@2
-      displayName: Archive Selenium
+      displayName: ArchiveSelenium
       inputs:
         rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automated-testing/selenium'
         includeRootFolder: false
@@ -133,26 +133,20 @@ stages:
               sudo apt-get install -y chromium-browser
               sudo apt-get install -y chromium-chromedriver
               sudo python3 -m pip install --upgrade pip
+              python3 --version
+              pwd
+              # cd ~/Download
               wget https://files.pythonhosted.org/packages/ed/9c/9030520bf6ff0b4c98988448a93c04fcbd5b13cd9520074d8ed53569ccfe/selenium-3.141.0.tar.gz
               tar -zxvf selenium-3.141.0.tar.gz 
               cd selenium-3.141.0/
               python3 setup.py install
-
-              # sudo pip3 install -U selenium              
-              # sudo python3 -m pip install selenium
-              # cd ~/Download
-              # tar -zxvf selenium-3.141.0.tar.gz 
-              # cd selenium-3.141.0/
-              # python3 setup.py install
-              # sudo pip3 install selenium
-
               python3 -c "import selenium; print('Selenium Version:', selenium.__version__)"
               export PATH=$PATH:/usr/lib/chromium-browser/       
 
 - stage: Test
   jobs:
   - deployment: run_ui_tests
-    displayName: RunUITestsOnApp
+    displayName: UIFunctionalTests
     environment:
       name: 'TEST'
       resourceType: VirtualMachine
@@ -176,7 +170,7 @@ stages:
               targetPath: '$(System.DefaultWorkingDirectory)/log/selenium/ui_tests.log'
               artifactName: 'selenium-logs-atf'
   - job: newman_test
-    displayName: TestPostmanWithNewman
+    displayName: IntegrationTests
     pool: Default
     steps: 
       - task: NodeTool@0
@@ -213,7 +207,7 @@ stages:
           testResultsFiles: '*.xml'
           mergeTestResults: true
           testRunTitle: 'Publish Newman test results'
-  - job: jmeter_test
+  - job: load_test
     displayName: LoadTesting
     pool: Default
     steps:
@@ -230,13 +224,13 @@ stages:
                                     -l log/jmeter/stress-test-result.csv \
                                     -e -f -o log/jmeter/stress-test-html-report \
                                     -j log/jmeter/jmeter-stress-test.log
-      displayName: JMeter Stress Test
+      displayName: Stress Test
     - bash: |
         apache-jmeter-5.4/bin/jmeter -n -t automated-testing/jmeter/endurance-test.jmx \
                                     -l log/jmeter/endurance-test-result.csv \
                                     -e -f -o log/jmeter/endurance-test-html-report \
                                     -j log/jmeter/jmeter-endurance-test.log
-      displayName: JMeter Endurance Test
+      displayName: Endurance Test
     - task: ArchiveFiles@2
       displayName: Archive JMeter Stress Test HTML Report
       inputs:
