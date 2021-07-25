@@ -159,7 +159,7 @@ stages:
               sudo cp /var/log/selenium/ui_tests.log log/selenium/ui_tests.log
             displayName: Execute UI functional tests using Selenium
           - task: PublishPipelineArtifact@1
-            displayName: Publish logs from Selenium
+            displayName: Publish logs from Selenium tests
             inputs:
               targetPath: '$(System.DefaultWorkingDirectory)/log/selenium/ui_tests.log'
               artifactName: 'selenium-logs-atf'
