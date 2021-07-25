@@ -132,8 +132,10 @@ stages:
               sudo apt-get install zip unzip -y
               sudo apt-get install -y chromium-browser
               sudo apt-get install -y chromium-chromedriver
-              sudo python3 -m pip install --upgrade pip
-              sudo python3 -m pip install selenium
+              pip3 install webdriver-manager
+              sudo pip3 install -U selenium              
+              # sudo python3 -m pip install --upgrade pip
+              # sudo python3 -m pip install selenium
               # cd ~/Download
               # tar -zxvf selenium-3.141.0.tar.gz 
               # cd selenium-3.141.0/
