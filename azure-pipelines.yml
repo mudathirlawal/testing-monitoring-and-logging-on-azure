@@ -179,13 +179,13 @@ stages:
           mkdir -p log/newman
         displayName: Install Newman
       - bash: |
-          newman run automated-testing/postman/RegressionTests.json \
+          newman run automated-testing/postman/RegressionTests.postman_collection.json \
                     --reporters cli,junit \
                     --reporter-junit-export log/newman/RegressionTests.xml \
                     --suppress-exit-code
         displayName: Regression tests
       - bash: |
-          newman run automated-testing/postman/ValidationTests.json \
+          newman run automated-testing/postman/ValidationTests.postman_collection.json \
                     --reporters cli,junit \
                     --reporter-junit-export log/newman/ValidationTests.xml
           ls -la $(System.DefaultWorkingDirectory)/log/newman/
