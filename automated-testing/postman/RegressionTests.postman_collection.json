@@ -88,11 +88,10 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful response\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"success\");",
-							"});",
-							"var json = pm.response.json();",
-							"pm.environment.set(\"id\", json.data.id);"
+							"const jsonData = pm.response.json();",
+							"pm.test(\"Test data type of the response\", () => {",
+							"  pm.expect(jsonData.id).to.be.a(\"number\");",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -103,7 +102,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"userId\": 2357,\n    \"id\": 2357,\n    \"title\": \"ensuring quality releases\",\n    \"body\": \"In this project you will learn how to take a newly developed Full-Stack application built for a retailer and deploy it to a cloud service provider so that it is available to customers. \\nYou will use the aws console to start and configure the services the application needs such as a database to store product information and a web server allowing the site to be discovered by potential customers. \\nYou will modify your package.json scripts and replace hard coded secrets with environment variables in your code.\"\n}",
+					"raw": "{\n    \"userId\": 9,\n    \"id\": 9,\n    \"title\": \"ensuring quality releases\",\n    \"body\": \"In this project you will learn how to take a newly developed Full-Stack application built for a retailer and deploy it to a cloud service provider so that it is available to customers. \\nYou will use the aws console to start and configure the services the application needs such as a database to store product information and a web server allowing the site to be discovered by potential customers. \\nYou will modify your package.json scripts and replace hard coded secrets with environment variables in your code.\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
