@@ -18,6 +18,7 @@ def login( user, password, driver ):
     print ('Navigating to the demo page to login ...')
     driver.get( uri )
 
+# Add product to cart:
 def add_product_to_cart( driver ):
     product = driver.find_element_by_class_name('inventory_item')
     add_to_cart_button = driver.find_element_by_css_selector(
