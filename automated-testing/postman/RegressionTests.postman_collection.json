@@ -15,13 +15,7 @@
 							"pm.test(\"Successful response\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"success\");",
 							"});",
-							"pm.test(\"Data is valid\", () => {",
-							"  const responseJson = pm.response.json();",
-							"  pm.expect(responseJson.id).to.eql(\"10\");",
-							"  pm.expect(responseJson.userId).to.eql(\"99\");",
-							"  pm.expect(responseJson.title).to.eql(\"temporibus sit alias delectus eligendi possimus magni\");",
-							"  pm.expect(responseJson.body).to.eql(\"quo deleniti praesentium dicta non quod\\naut est molestias\\nmolestias et officia quis nihil\\nitaque dolorem quia\");",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -118,10 +112,10 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"const jsonData = pm.response.json();",
-							"pm.test(\"Test data type of the response\", () => {",
-							"  pm.expect(jsonData.id).to.eql(pm.environment.replaceIn(\"{{id}}\"));",
-							"});"
+							"pm.test(\"Successful response\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"success\");",
+							"});",
+							""
 						],
 						"type": "text/javascript"
 					}
