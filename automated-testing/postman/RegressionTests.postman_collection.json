@@ -17,8 +17,8 @@
 							"});",
 							"pm.test(\"Data is valid\", () => {",
 							"  const responseJson = pm.response.json();",
-							"  pm.expect(responseJson.id).to.eql(\"userId\");",
-							"  pm.expect(responseJson.userId).to.eql(\"id\");",
+							"  pm.expect(jsonData.id).to.be.a(\"number\");",
+							"  pm.expect(jsonData.userId).to.be.a(\"number\");",
 							"  pm.expect(responseJson.title).to.eql(\"temporibus sit alias delectus eligendi possimus magni\");",
 							"  pm.expect(responseJson.body).to.eql(\"quo deleniti praesentium dicta non quod\\naut est molestias\\nmolestias et officia quis nihil\\nitaque dolorem quia\");",
 							"});"
