@@ -15,6 +15,13 @@
 							"pm.test(\"Successful response\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"success\");",
 							"});",
+							"pm.test(\"Data is valid\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  pm.expect(responseJson.id).to.eql(\"1\");",
+							"  pm.expect(responseJson.userId).to.eql(\"1\");",
+							"  pm.expect(responseJson.title).to.eql(\"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\");",
+							"  pm.expect(responseJson.body).to.eql(\"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\");",
+							"});",
 							""
 						],
 						"type": "text/javascript"
