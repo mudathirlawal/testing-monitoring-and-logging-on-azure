@@ -6,12 +6,14 @@ import logging
 import sys
 
 # Start the browser and login with standard_user
-
 def login(user, password):
     print('Starting the browser...')
     options = ChromeOptions()
     options.add_argument("--headless")
-    driver = webdriver.Chrome(options=options)
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome('/usr/bin/chromium-browser',options=options)
+    driver.get('https://www.google.nl/')
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
     # driver = webdriver.Chrome()
