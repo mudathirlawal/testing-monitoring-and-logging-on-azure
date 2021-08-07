@@ -12,7 +12,7 @@ def login(user, password):
     options.add_argument("--headless")
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome('/usr/bin/chromium-browser',options=options)
+    driver = webdriver.Chrome('usr/local/lib/python3.5/dist-packages/selenium-3.141.0-py3.5.egg/selenium/webdriver/chrome/webdriver.py',options=options)
     driver.get('https://www.google.nl/')
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
