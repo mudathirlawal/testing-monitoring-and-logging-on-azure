@@ -29,7 +29,7 @@ def login(user, password):
 
     logging.info('Searching for Products')
     headerLabel = driver.find_element_by_class_name('header_secondary_container').text
-    assert "Products" in headerLabel
+    assert "PRODUCTS" in headerLabel
     logging.info('Successfully logged in, user: ' + user)
 
     logging.info('Find products')
