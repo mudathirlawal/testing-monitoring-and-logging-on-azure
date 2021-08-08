@@ -25,11 +25,11 @@ def login(user, password):
         'input[data-test="username"]').send_keys(user)
     driver.find_element_by_css_selector(
         'input[data-test="password"]').send_keys(password)
-    driver.find_element_by_css_selector('input[value=LOGIN]').click()
+    driver.find_element_by_css_selector('input[value=Login]').click()
 
     logging.info('Searching for Products')
-    # headerLabel = driver.find_element_by_class_name('title').text
-    # assert "Products" in headerLabel
+    headerLabel = driver.find_element_by_class_name('title').text
+    assert "Products" in headerLabel
     logging.info('Successfully logged in, user: ' + user)
 
     logging.info('Find products')
@@ -45,7 +45,7 @@ def login(user, password):
     logging.info('Verify if cart has 6 added products')
     cart_label = driver.find_element_by_css_selector(
         '.shopping_cart_badge').text
-    # assert cart_label == '9'
+    assert cart_label == '6'
 
     logging.info('Navigate to cart')
     driver.find_element_by_css_selector('a.shopping_cart_link').click()
