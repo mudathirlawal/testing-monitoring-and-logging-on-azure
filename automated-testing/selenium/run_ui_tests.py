@@ -25,7 +25,7 @@ def login(user, password):
         'input[data-test="username"]').send_keys(user)
     driver.find_element_by_css_selector(
         'input[data-test="password"]').send_keys(password)
-    driver.find_element_by_css_selector('input[value=Login]').click()
+    driver.find_element_by_css_selector('input[value=LOGIN]').click()
 
     logging.info('Searching for Products')
     # headerLabel = driver.find_element_by_class_name('title').text
