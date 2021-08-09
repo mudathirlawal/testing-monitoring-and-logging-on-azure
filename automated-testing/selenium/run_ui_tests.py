@@ -51,7 +51,7 @@ def run_ui_tests(user, password):
         '.shopping_cart_badge').text
     assert cart_label == '6'
 
-    print(log_timestamp() + 'Navigating to shopping cart ...')
+    print(log_timestamp() + 'Navigating to shopping cart.')
     driver.find_element_by_css_selector('a.shopping_cart_link').click()
     assert '/cart.html' in driver.current_url, log_timestamp() + 'Navigation to shopping cart unsuccessful.'
 
