@@ -11,7 +11,7 @@ def log_timestamp():
 
 # Start the browser and login with standard_user
 def run_ui_tests(user, password):
-    print( log_timestamp() + 'Starting the browser ...' )
+    print( log_timestamp() + 'Starting the browser...' )
     options = ChromeOptions()
     options.add_argument("--headless")
     options.add_argument('--no-sandbox')
