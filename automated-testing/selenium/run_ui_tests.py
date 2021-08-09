@@ -72,6 +72,6 @@ def login(user, password):
         cart_emptiness_flag = True
 
     assert cart_emptiness_flag == True
-    print(log_timestamp() + 'All items have been emptied from cart: ' + cart_emptiness_flag)
+    print(log_timestamp() + 'All items have been emptied from cart: ' + str(cart_emptiness_flag))
 
 login('standard_user', 'secret_sauce')
