@@ -30,12 +30,12 @@ def run_ui_tests(user, password):
         'input[data-test="password"]').send_keys(password)
     driver.find_element_by_css_selector('input[value=Login]').click()
 
-    print(log_timestamp() + 'Searching for Products')
+    print(log_timestamp() + 'Searching for Products ...')
     headerLabel = driver.find_element_by_class_name('header_secondary_container').text
     assert "PRODUCTS" in headerLabel
     print(log_timestamp() + 'Successfully logged in ' + user + '.')
 
-    print(log_timestamp() + 'Searching for products ...')
+    print(log_timestamp() + 'Selecting products ...')
     products = driver.find_elements_by_css_selector('.inventory_item')
 
     print(log_timestamp() + 'Adding products to cart ...')
@@ -43,9 +43,9 @@ def run_ui_tests(user, password):
         product_name = product.find_element_by_css_selector(
             '.inventory_item_name').text
         product.find_element_by_css_selector('button.btn_inventory').click()
-        print(log_timestamp() + 'Product ' + product_name + ' successfully added to cart.')
+        print(log_timestamp() + product_name + ' successfully added to cart.')
 
-    print(log_timestamp() + 'Verify if cart has been populated with 6 products.')
+    print(log_timestamp() + 'Verifying if cart has been populated with 6 products ...')
     cart_label = driver.find_element_by_css_selector(
         '.shopping_cart_badge').text
     assert cart_label == '6'
@@ -54,7 +54,7 @@ def run_ui_tests(user, password):
     driver.find_element_by_css_selector('a.shopping_cart_link').click()
     assert '/cart.html' in driver.current_url, log_timestamp() + 'Navigation to shopping cart unsuccessful'
 
-    print(log_timestamp() + 'Removing products from cart')
+    print(log_timestamp() + 'Removing products from cart.')
     cart_products = driver.find_elements_by_css_selector('.cart_item')
     for product in cart_products:
         product_name = product.find_element_by_css_selector(
@@ -70,6 +70,6 @@ def run_ui_tests(user, password):
         cart_emptiness_flag = True
     
     assert cart_emptiness_flag == True
-    print(log_timestamp() + 'Shopping cart successfully emptied:' + str(cart_emptiness_flag))
+    print(log_timestamp() + 'Shopping cart successfully emptied: ' + str(cart_emptiness_flag))
 
 run_ui_tests('standard_user', 'secret_sauce')
