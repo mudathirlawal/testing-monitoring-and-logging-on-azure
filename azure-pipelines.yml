@@ -142,7 +142,7 @@ stages:
 - stage: Test
   jobs:
   - deployment: run_ui_tests
-    displayName: FunctionalTests
+    displayName: RunFunctionalTests
     environment:
       name: 'TEST'
       resourceType: VirtualMachine
@@ -166,7 +166,7 @@ stages:
               targetPath: '$(System.DefaultWorkingDirectory)/log/selenium/ui_tests.log'
               artifactName: 'selenium-logs-atf'
   - job: newman_test
-    displayName: IntegrationTests
+    displayName: RunIntegrationTests
     pool: Default
     steps: 
       - task: NodeTool@0
@@ -204,7 +204,7 @@ stages:
           mergeTestResults: true
           testRunTitle: 'PublishNewmanTestResults'
   - job: performance_tests
-    displayName: PerformanceTests
+    displayName: RunPerformanceTests
     pool: Default
     steps:
     - bash: |
