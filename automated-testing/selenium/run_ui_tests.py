@@ -41,7 +41,7 @@ def run_ui_tests(user, password):
         product_name = product.find_element_by_css_selector(
             '.inventory_item_name').text
         product.find_element_by_css_selector('button.btn_inventory').click()
-        print(log_timestamp() + product_name + ' successfully added to cart.\n')
+        print(log_timestamp() + product_name + ' successfully added to cart.')
 
     print(log_timestamp() + 'Verifying if cart has been populated with 6 products.')
     cart_label = driver.find_element_by_css_selector(
