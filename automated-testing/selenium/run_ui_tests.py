@@ -11,7 +11,7 @@ def log_timestamp():
 
 # Start the browser and login with standard_user
 def run_ui_tests(user, password):
-    print( log_timestamp() + 'Starting the browser...' )
+    print( log_timestamp() + 'Starting the browser...\n' )
     options = ChromeOptions()
     options.add_argument("--headless")
     options.add_argument('--no-sandbox')
@@ -20,50 +20,47 @@ def run_ui_tests(user, password):
     driver.get('https://www.google.nl/')
 
     # driver = webdriver.Chrome()
-    print(log_timestamp() + 'Browser started successfully.')
-    print(log_timestamp() + 'Navigating to the login page.')
+    print(log_timestamp() + 'Browser started successfully.\n')
+    print(log_timestamp() + 'Navigating to the login page.\n')
     driver.get('https://www.saucedemo.com/')
-
-    print(log_timestamp() + 'Loging in to https://www.saucedemo.com/')
+    print(log_timestamp() + 'Loging in to https://www.saucedemo.com/\n')
     driver.find_element_by_css_selector(
         'input[data-test="username"]').send_keys(user)
     driver.find_element_by_css_selector(
         'input[data-test="password"]').send_keys(password)
     driver.find_element_by_css_selector('input[value=Login]').click()
 
-    print(log_timestamp() + 'Searching for Products.')
+    print(log_timestamp() + 'Searching for Products.\n')
     headerLabel = driver.find_element_by_class_name('header_secondary_container').text
     assert "PRODUCTS" in headerLabel
-    print(log_timestamp() + 'Successfully logged in ' + user + '.')
-
-    print(log_timestamp() + 'Selecting products.')
+    print(log_timestamp() + 'Successfully logged in ' + user + '.\n')
+    print(log_timestamp() + 'Selecting products.\n')
     products = driver.find_elements_by_css_selector('.inventory_item')
-
-    print(log_timestamp() + 'Adding products to cart.')
+    print(log_timestamp() + 'Adding products to cart.\n')
     for product in products:
         product_name = product.find_element_by_css_selector(
             '.inventory_item_name').text
         product.find_element_by_css_selector('button.btn_inventory').click()
-        print(log_timestamp() + product_name + ' successfully added to cart.')
+        print(log_timestamp() + product_name + ' successfully added to cart.\n')
 
-    print(log_timestamp() + 'Verifying if cart has been populated with 6 products.')
+    print(log_timestamp() + 'Verifying if cart has been populated with 6 products.\n')
     cart_label = driver.find_element_by_css_selector(
         '.shopping_cart_badge').text
     assert cart_label == '6'
 
-    print(log_timestamp() + 'Navigating to shopping cart.')
+    print(log_timestamp() + 'Navigating to shopping cart.\n')
     driver.find_element_by_css_selector('a.shopping_cart_link').click()
-    assert '/cart.html' in driver.current_url, log_timestamp() + 'Navigation to shopping cart unsuccessful.'
+    assert '/cart.html' in driver.current_url, log_timestamp() + 'Navigation to shopping cart unsuccessful.\n'
 
-    print(log_timestamp() + 'Removing products from cart.')
+    print(log_timestamp() + 'Removing products from cart.\n')
     cart_products = driver.find_elements_by_css_selector('.cart_item')
     for product in cart_products:
         product_name = product.find_element_by_css_selector(
             '.inventory_item_name').text
         product.find_element_by_css_selector('button.cart_button').click()
-        print(log_timestamp() + product_name + ' successfully removed from cart.')
+        print(log_timestamp() + product_name + ' successfully removed from cart.\n')
 
-    print(log_timestamp() + 'Confirming that shopping cart is empty.')
+    print(log_timestamp() + 'Confirming that shopping cart is empty.\n')
 
     if driver.find_elements_by_css_selector('.shopping_cart_badge'):
         cart_emptiness_flag = False
@@ -71,6 +68,6 @@ def run_ui_tests(user, password):
         cart_emptiness_flag = True
     
     assert cart_emptiness_flag == True
-    print(log_timestamp() + 'Shopping cart successfully emptied: ' + str(cart_emptiness_flag))
+    print(log_timestamp() + 'Shopping cart successfully emptied: ' + str(cart_emptiness_flag) + '\n')
 
 run_ui_tests('standard_user', 'secret_sauce')
