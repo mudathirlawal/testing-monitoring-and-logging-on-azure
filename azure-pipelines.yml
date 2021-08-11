@@ -222,12 +222,14 @@ stages:
                                     -l log/jmeter/stress-test-result.jtl \
                                     -e -f -o log/jmeter/stress-test-html-report \
                                     -j log/jmeter/jmeter-stress-test.log
+        cat stress-test-html-report
       displayName: Spike Test
     - bash: |
         apache-jmeter-5.4/bin/jmeter -n -t automated-testing/jmeter/endurance-test.jmx \
                                     -l log/jmeter/endurance-test-result.jtl \
                                     -e -f -o log/jmeter/endurance-test-html-report \
                                     -j log/jmeter/jmeter-endurance-test.log
+        cat endurance-test-html-report                             
       displayName: Endurance Test
     - task: ArchiveFiles@2
       displayName: Archive JMeter Stress Test HTML Report
