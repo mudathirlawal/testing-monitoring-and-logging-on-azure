@@ -12,7 +12,6 @@ import logging
 
 # Start the browser and login with standard_user
 def run_ui_tests(user, password):
-    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
     logging.INFO( 'Starting the browser...' )
     options = ChromeOptions()
     options.add_argument("--headless")
@@ -20,6 +19,10 @@ def run_ui_tests(user, password):
     options.add_argument('--disable-dev-shm-usage')
     driver = webdriver.Chrome(options=options)
     driver.get('https://www.google.nl/')
+    logging.basicConfig(
+        format='%(asctime)s %(levelname)-8s %(message)s',
+        level=logging.INFO,
+        datefmt='%Y-%m-%d %H:%M:%S')
 
     # driver = webdriver.Chrome()
     logging.INFO('Browser started successfully.')
