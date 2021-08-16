@@ -161,7 +161,7 @@ stages:
               mkdir -p log/selenium
               sudo cp /var/log/selenium/ui_tests.log log/selenium/ui_tests.log
               sudo chmod 775 log/selenium/ui_tests.log
-              # cat log/selenium/ui_tests.log
+              cat log/selenium/ui_tests.log
             displayName: Execute UI functional tests using Selenium
           - task: PublishPipelineArtifact@1
             displayName: Publish logs from Selenium tests
