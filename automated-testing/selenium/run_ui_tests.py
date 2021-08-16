@@ -12,10 +12,7 @@ import logging
 
 # Start the browser and login with standard_user
 def run_ui_tests(user, password):
-    logging.basicConfig(
-    format='%(asctime)s %(levelname)-8s %(message)s',
-    level=logging.INFO,
-    datefmt='%Y-%m-%d %H:%M:%S')
+    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
     logging.INFO( 'Starting the browser...' )
     options = ChromeOptions()
     options.add_argument("--headless")
