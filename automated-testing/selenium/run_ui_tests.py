@@ -9,13 +9,13 @@ import logging
 # def log_timestamp():
 #     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 #     return (current_time + ' ')
-logging.basicConfig(
-    format='%(asctime)s %(levelname)-8s %(message)s',
-    level=logging.INFO,
-    datefmt='%Y-%m-%d %H:%M:%S')
 
 # Start the browser and login with standard_user
 def run_ui_tests(user, password):
+    logging.basicConfig(
+    format='%(asctime)s %(levelname)-8s %(message)s',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S')
     logging.INFO( 'Starting the browser...' )
     options = ChromeOptions()
     options.add_argument("--headless")
@@ -25,8 +25,8 @@ def run_ui_tests(user, password):
     driver.get('https://www.google.nl/')
 
     # driver = webdriver.Chrome()
-    logging.INFO( 'Browser started successfully.')
-    logging.INFO( 'Navigating to the login page.')
+    logging.INFO('Browser started successfully.')
+    logging.INFO('Navigating to the login page.')
     driver.get('https://www.saucedemo.com/')
     logging.INFO( 'Loging in to https://www.saucedemo.com/')
     driver.find_element_by_css_selector(
