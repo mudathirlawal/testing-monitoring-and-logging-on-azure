@@ -63,7 +63,7 @@ def run_ui_tests(user, password):
         product_name = product.find_element_by_css_selector(
             '.inventory_item_name').text
         product.find_element_by_css_selector('button.cart_button').click()
-        logging.INFO(product_name + ' successfully removed from cart.')
+        logging.info(product_name + ' successfully removed from cart.')
         
     logging.info('Confirming that shopping cart is empty.')
     if driver.find_elements_by_css_selector('.shopping_cart_badge'):
