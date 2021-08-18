@@ -6,10 +6,6 @@ from selenium.common.exceptions import NoSuchElementException
 import datetime
 import logging
 
-# def log_timestamp():
-#     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-#     return (current_time + ' ')
-
 # Start the browser and login with standard_user
 def run_ui_tests(user, password):
     logging.basicConfig(
