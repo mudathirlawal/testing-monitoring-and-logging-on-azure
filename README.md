@@ -2,7 +2,7 @@
 
 # Testing, Monitoring, and Logging on Azure
 
-![Project workflow overview](workflow-clips/project_overview.png)
+![Project workflow overview](workflow-clips/11_project_overview.png)
 
 This project demonstrates how to ensure `quality releases` using Azure cloud through the implementation of automated testing, performance monitoring and logging using Azure DevOps, Apache JMeter, Selenium, Postman and Terraform.
 
