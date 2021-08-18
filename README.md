@@ -124,5 +124,5 @@ Configure Azure Log Analytics to consume and aggregate custom application events
 ### Logs from Azure Log Analytics:
 ![Validation test](workflow-clips/9_azure_log_analytics_logs.png)
 
-### Triggared Email Alert:
+### Triggered Email Alert:
 ![Validation test](workflow-clips/10_triggered_email_alert.png)
