@@ -155,13 +155,13 @@ stages:
               find . -type f ! -name 'selenium-$(Build.BuildId).zip' -delete 
               unzip -o $(Pipeline.Workspace)/selenium-atf/selenium-$(Build.BuildId) -d .
               sudo mkdir -p /var/logs/selenium && sudo chmod 664 /var/logs/selenium
-              sudo python3 -u run_ui_tests.py 2>&1 | sudo tee -a /var/log/selenium/ui_tests.log
+              sudo python3 -u run_ui_tests.py 2>&1 | sudo tee -a /var/logs/selenium/ui_tests.log
               # sudo python3 -u run_ui_tests.py | sudo dd of=/var/logs/selenium/ui_tests.log
               cd $(System.DefaultWorkingDirectory)
-              mkdir -p log/selenium
+              mkdir -p logs/selenium
               sudo cp /var/logs/selenium/ui_tests.log logs/selenium/ui_tests.log
               sudo chmod 775 logs/selenium/ui_tests.log
-              # cat log/selenium/ui_tests.log
+              # cat logs/selenium/ui_tests.log
             displayName: Execute UI functional tests using Selenium
           - task: PublishPipelineArtifact@1
             displayName: Publish logs from Selenium tests
